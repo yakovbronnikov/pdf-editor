@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --white: #fff;
+    --bg-field: #F6F6F6;
+    --bg-field-hover: #EBEBEB;
+    --text-secondary: #606060;
+    --text-primary: #000;
+
+    --primary: #0075FF;
+    --primary-hover: #0075FF;
+
+    --info: #0075FF;
+    --info-20: rgba(0, 117, 255, 0.20);
+    --info-5: rgba(0, 117, 255, 0.05);
+
+    --error: #FF002E;
+    --error-20: rgba(255, 0, 46, 0.2);
+    --error-5: rgba(255, 0, 46, 0.05);
+
+    --success: #30EF00;
+    --success-20: rgba(48, 239, 0, 0.2);
+    --success-5: rgba(48, 239, 0, 0.05);
+}
+
+* {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--text-primary);
+    transition: .2s;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 80px;
+}
+
+#preview {
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.input {
+    position: relative;
+}
+
+input,
+select {
+    width: 100%;
+    background: var(--bg-field);
+    border-radius: 12px;
+    padding: 24px 24px 12px 24px;
+    transition: .2s;
+    border: none;
+    outline: 3px solid var(--white);
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input:hover,
+select:hover {
+    background: var(--bg-field-hover);
+}
+
+input::placeholder,
+select::placeholder {
+    color: var(--layers-color);
+    transition: .4s;
+    opacity: 0;
+}
+
+input:focus::placeholder,
+select:focus::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.3;
+}
+
+
+input:focus,
+select:focus {
+    background: none;
+    outline: 3px solid var(--info-20);
+}
+
+label {
+    position: absolute;
+    top: 18px;
+    left: 24px;
+    color: var(--text-secondary);
+    transition: .2s;
+    pointer-events: none;
+}
+
+input:focus~label,
+input:valid~label,
+select:focus~label,
+select:valid~label {
+    font-size: 12px;
+    top: 8px;
+    line-height: 18px;
+}
+
+
+.button,
+.button-secondary,
+.button-link {
+    width: 100%;
+    border-radius: 12px;
+    padding: 16px 32px;
+    border: none;
+    background: var(--primary);
+    color: var(--white);
+    cursor: pointer;
+}
+
+
+.button:hover {
+    background: var(--primary-hover);
+}
