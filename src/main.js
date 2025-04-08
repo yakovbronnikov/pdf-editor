@@ -1,4 +1,6 @@
 import './style.css'
+import evroins from '/public/pdf-templates/evroins.pdf'
+import derdanaBold from '/src/Verdana-Bold.ttf'
 import { templateEvroins } from './layout-templates/evroins.js'
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 import fontkit from '@pdf-lib/fontkit';
@@ -65,37 +67,41 @@ document.querySelector('#app').innerHTML = `
             <button class="button" id="generate">Применить поля</button>
         </div>
     </div>
-    <iframe src="src/templates/evroins.pdf" id="preview"></iframe>
+    <iframe id="preview"></iframe>
 `;
 
 
-document.getElementById('generate').addEventListener('click', async () => {
-  // Загрузка PDF из публичной папки
-  const existingPdfBytes = await fetch('src/templates/evroins.pdf').then(res => res.arrayBuffer());
+document.getElementById('generate').addEventListener('click', generatePdf) 
 
-  // Загрузка кастомного шрифта
-  const fontBytes = await fetch('src/Verdana-Bold.ttf').then(res => res.arrayBuffer());
+async function generatePdf() {
+    // Загрузка PDF из публичной папки
+    const existingPdfBytes = await fetch(evroins).then(res => res.arrayBuffer());
+  
+    // Загрузка кастомного шрифта
+    const fontBytes = await fetch(derdanaBold).then(res => res.arrayBuffer());
+  
+    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+    pdfDoc.registerFontkit(fontkit);
+    const verdanaBold = await pdfDoc.embedFont(fontBytes);
+    const pages = pdfDoc.getPages();
+    const firstPage = pages[0];
+  
+    templateEvroins(firstPage, verdanaBold, rgb)
+  
+    const pdfBytes = await pdfDoc.save();
+  
+  
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+  
+    document.getElementById('preview').src = url
+  
+    // Скачивание
+    // const a = document.createElement('a');
+    // a.href = url;
+    // a.download = 'output.pdf';
+    // a.click();
+    // URL.revokeObjectURL(url);
+  }
 
-  const pdfDoc = await PDFDocument.load(existingPdfBytes);
-  pdfDoc.registerFontkit(fontkit);
-  const verdanaBold = await pdfDoc.embedFont(fontBytes);
-  const pages = pdfDoc.getPages();
-  const firstPage = pages[0];
-
-  templateEvroins(firstPage, verdanaBold, rgb)
-
-  const pdfBytes = await pdfDoc.save();
-
-
-  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
-
-  document.getElementById('preview').src = url
-
-  // Скачивание
-  // const a = document.createElement('a');
-  // a.href = url;
-  // a.download = 'output.pdf';
-  // a.click();
-  // URL.revokeObjectURL(url);
-});
+  generatePdf()
