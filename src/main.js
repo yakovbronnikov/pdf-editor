@@ -1,5 +1,5 @@
 import './style.css'
-import { templateEvroins } from './counter.js'
+import { templateEvroins } from './layout-templates/evroins.js'
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 import fontkit from '@pdf-lib/fontkit';
 
