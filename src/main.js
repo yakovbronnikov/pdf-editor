@@ -1,7 +1,8 @@
 import './style.css'
-import evroins from '/public/pdf-templates/evroins.pdf'
+import evroins from '/src/pdf-templates/evroins.pdf'
 import derdanaBold from '/src/Verdana-Bold.ttf'
-import { templateEvroins } from './layout-templates/evroins.js'
+import { evroinsLayout } from './layout-templates/evroins.js'
+import { evroinsForm } from './form-templates/evroins.js'
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 import fontkit from '@pdf-lib/fontkit';
 
@@ -18,90 +19,86 @@ document.querySelector('#app').innerHTML = `
                 </select>
                 <label for="template">Шаблон</label>
             </div>
-            <div id="form">
-                <div class="input">
-                    <input id="number" type="text" placeholder="Введите номер" required>
-                    <label for="number">Номер полиса</label>
-                </div>
-
-                <div class="input">
-                    <input id="name" type="text" placeholder="Имя и фамилия" required>
-                    <label for="name">Страхователь</label>
-                </div>
-
-                <div class="input">
-                    <input id="birth-date" type="text" placeholder="Введите дату" required>
-                    <label for="birth-date">Дата рождения</label>
-                </div>
-
-                <div class="input">
-                    <input id="passport" type="text" placeholder="Серия и номер" required>
-                    <label for="passport">Паспорт</label>
-                </div>
-
-                <div class="input">
-                    <input id="address" type="text" placeholder="Страна, город" required>
-                    <label for="address">Адрес</label>
-                </div>
-
-                <div class="input">
-                    <input id="area" type="text" placeholder="Введите страну" required>
-                    <label for="area">Территория действия</label>
-                </div>
-
-                <div class="input">
-                    <input id="date-from" type="text" placeholder="Введите дату" required>
-                    <label for="date-from">Поездка с</label>
-                </div>
-
-                <div class="input">
-                    <input id="date-to" type="text" placeholder="Введите дату" required>
-                    <label for="date-to">Поездка до</label>
-                </div>
-
-                <div class="input">
-                    <input id="days" type="text" placeholder="Введите количество" required>
-                    <label for="days">Количество дней</label>
-                </div>
-            </div>
+            <div class="tip">Если хотите стереть поле в файле, просто вставьте пробел</div>
+            <div id="form"></div>
             <button class="button" id="generate">Применить поля</button>
+            <a href="#" class="button" id="download">Скачать файл</a>
         </div>
     </div>
     <iframe id="preview"></iframe>
 `;
 
+const templates = [
+    {
+        pdf: evroins,
+        form: evroinsForm,
+        layout: evroinsLayout,
+        name: 'Имя Фамилия ЕВРОИНС.pdf'
+    }
+]
 
-document.getElementById('generate').addEventListener('click', generatePdf) 
+const tSelect = document.getElementById('template')
+const form = document.getElementById('form')
+form.innerHTML = templates[tSelect.value].form
+
+
+
+tSelect.addEventListener('change', (e) => {
+    form.innerHTML = templates[tSelect.value].form
+})
+
+document.getElementById('generate').addEventListener('click', generatePdf)
 
 async function generatePdf() {
     // Загрузка PDF из публичной папки
-    const existingPdfBytes = await fetch(evroins).then(res => res.arrayBuffer());
-  
+    const existingPdfBytes = await fetch(templates[tSelect.value].pdf).then(res => res.arrayBuffer());
+    
     // Загрузка кастомного шрифта
     const fontBytes = await fetch(derdanaBold).then(res => res.arrayBuffer());
-  
+
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
     pdfDoc.registerFontkit(fontkit);
     const verdanaBold = await pdfDoc.embedFont(fontBytes);
     const pages = pdfDoc.getPages();
     const firstPage = pages[0];
-  
-    templateEvroins(firstPage, verdanaBold, rgb)
-  
+
+    formToLayout(firstPage, templates[tSelect.value].layout, verdanaBold)
+
     const pdfBytes = await pdfDoc.save();
-  
-  
     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
     const url = URL.createObjectURL(blob);
-  
-    document.getElementById('preview').src = url
-  
-    // Скачивание
-    // const a = document.createElement('a');
-    // a.href = url;
-    // a.download = 'output.pdf';
-    // a.click();
-    // URL.revokeObjectURL(url);
-  }
 
-  generatePdf()
+    document.getElementById('preview').src = url
+
+    const a = document.getElementById('download')
+    a.href = url;
+    a.download = templates[tSelect.value].name;
+}
+
+function formToLayout(page, layout, font) {
+    const formFields = document.querySelectorAll('input')
+
+    for (let i = 0; i < formFields.length; i++) {
+        if (formFields[i].value !== '' || formFields[i].value == ' ') {
+            page.drawRectangle({
+                width: layout[i].width,
+                height: layout[i].height,
+                x: layout[i].x,
+                y: layout[i].y,
+                color: layout[i].bgColor
+            })
+
+            page.drawText(formFields[i].value, {
+                x: layout[i].textX,
+                y: layout[i].textY,
+                size: layout[i].size,
+                color: layout[i].textColor,
+                font: font
+            })
+        }
+    }
+}
+
+generatePdf()
+
+

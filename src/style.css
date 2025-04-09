@@ -17,10 +17,6 @@
     --error: #FF002E;
     --error-20: rgba(255, 0, 46, 0.2);
     --error-5: rgba(255, 0, 46, 0.05);
-
-    --success: #30EF00;
-    --success-20: rgba(48, 239, 0, 0.2);
-    --success-5: rgba(48, 239, 0, 0.05);
 }
 
 * {
@@ -84,6 +80,24 @@ body {
 h1 {
     font-size: 24px;
     line-height: 32px;
+    text-align: center;
+}
+
+h3 {
+    padding-left: 16px;
+    margin-top: 24px;
+}
+
+.tip {
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    background: var(--info-5);
+    border: 1px solid var(--info-20);
+    margin-top: -24px;
 }
 
 .input {
@@ -170,4 +184,59 @@ select:valid~label {
 
 .button:hover {
     background: var(--primary-hover);
+}
+
+#download {
+    text-align: center;
+    text-decoration: none;
+    color: var(--info);
+    transition: 200ms;
+    background: var(--white);
+    margin-top: -32px;
+}
+
+#download:hover, #download:focus {
+    background: var(--info-5);
+}
+
+
+/* BREAKPOINTS */
+
+
+@media (max-width: 1024px) {
+    body {
+        height: auto;
+        overflow: auto;
+    }
+    
+    #app {
+      height: auto;
+      flex-direction: column;
+    }
+    
+    .page {
+        height: auto;
+        display: flex;
+        overflow-y: hidden;
+    }
+
+    #preview {
+        height: 800px;
+    }
+
+    .page_wrapper {
+        padding-bottom: 120px;
+    }
+}
+
+@media (max-width: 560px) {
+    
+    .page_wrapper {
+        padding: 24px;
+        padding-bottom: 80px;
+    }
+
+    #preview {
+        height: 400px;
+    }
 }
