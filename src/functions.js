@@ -23,6 +23,18 @@ import fontkit from '@pdf-lib/fontkit'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 
+window.removeTourist = removeTourist
+window.getTourists = getTourists
+window.addTourist = addTourist
+
+window.randomNumber = randomNumber
+window.dateFormat = dateFormat
+window.dayCount = dayCount
+window.standartDate = standartDate
+window.monthNameDate = monthNameDate
+window.today = today
+window.monthNameDateOnly = monthNameDateOnly
+
 const templates = [
     // {
     //     layout: {

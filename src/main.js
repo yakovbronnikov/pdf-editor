@@ -2,9 +2,31 @@ import './style.css'
 import { removeTourist, addTourist, getTourists } from './tourists.js'
 
 import {
+    randomNumber,
+    dateFormat,
+    dayCount,
+    standartDate,
+    monthNameDate,
+    today,
+    monthNameDateOnly
+} from './formats.js'
+
+import {
     generateAll,
     createZip,
 } from './functions.js'
+
+window.removeTourist = removeTourist
+window.getTourists = getTourists
+window.addTourist = addTourist
+
+window.randomNumber = randomNumber
+window.dateFormat = dateFormat
+window.dayCount = dayCount
+window.standartDate = standartDate
+window.monthNameDate = monthNameDate
+window.today = today
+window.monthNameDateOnly = monthNameDateOnly
 
 
 
