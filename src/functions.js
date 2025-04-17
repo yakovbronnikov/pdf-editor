@@ -58,9 +58,9 @@ const templates = [
 //     const cityFrom = document.getElementById('city-from').value
 //     const cityTo = document.getElementById('city-to').value
 
-//     const hotel = await fetch(`src/pdf-templates/booking-${cityTo}.pdf`).then(res => res.arrayBuffer())
-//     const insurance = await fetch(`src/pdf-templates/${insSelect}.pdf`).then(res => res.arrayBuffer())
-//     const route = await fetch(`src/pdf-templates/route-${cityTo}.pdf`).then(res => res.arrayBuffer())
+//     const hotel = await fetch(`pdf-templates/booking-${cityTo}.pdf`).then(res => res.arrayBuffer())
+//     const insurance = await fetch(`pdf-templates/${insSelect}.pdf`).then(res => res.arrayBuffer())
+//     const route = await fetch(`pdf-templates/route-${cityTo}.pdf`).then(res => res.arrayBuffer())
 
 //     const listPdfBytes = [hotel, insurance, route]
 //     const modifiedPDFs = []
@@ -69,9 +69,9 @@ const templates = [
 //         const pdfDoc = await PDFDocument.load(listPdfBytes[i])
         
 //         pdfDoc.registerFontkit(fontkit)
-//         const verdanaBytes = await fetch('src/fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
+//         const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
 //         const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-//         const golosTextBytes = await fetch('src/fonts/GolosText-Regular.ttf').then(res => res.arrayBuffer())
+//         const golosTextBytes = await fetch('fonts/GolosText-Regular.ttf').then(res => res.arrayBuffer())
 //         const golosText = await pdfDoc.embedFont(golosTextBytes)
 
 //         const pages = pdfDoc.getPages()
@@ -103,8 +103,8 @@ export async function generateAll() {
     const cityFrom = document.getElementById('city-from').value
     const cityTo = document.getElementById('city-to').value
 
-    const insurance = await fetch(`src/pdf-templates/${insSelect}.pdf`).then(res => res.arrayBuffer())
-    const route = await fetch(`src/pdf-templates/route-${cityTo}.pdf`).then(res => res.arrayBuffer())
+    const insurance = await fetch(`pdf-templates/${insSelect}.pdf`).then(res => res.arrayBuffer())
+    const route = await fetch(`pdf-templates/route-${cityTo}.pdf`).then(res => res.arrayBuffer())
 
     const listPdfBytes = [ insurance, route]
     const modifiedPDFs = []
@@ -113,9 +113,9 @@ export async function generateAll() {
         const pdfDoc = await PDFDocument.load(listPdfBytes[i])
         
         pdfDoc.registerFontkit(fontkit)
-        const verdanaBytes = await fetch('src/fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
+        const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
         const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-        const golosTextBytes = await fetch('src/fonts/GolosText-Regular.ttf').then(res => res.arrayBuffer())
+        const golosTextBytes = await fetch('fonts/GolosText-Regular.ttf').then(res => res.arrayBuffer())
         const golosText = await pdfDoc.embedFont(golosTextBytes)
 
         const pages = pdfDoc.getPages()
@@ -181,7 +181,7 @@ async function generateTickets() {
     const cityFrom = document.getElementById('city-from').value
     const cityTo = document.getElementById('city-to').value
 
-    const ticket = await fetch(`src/pdf-templates/${cityFrom}-${cityTo}.pdf`).then(res => res.arrayBuffer())
+    const ticket = await fetch(`pdf-templates/${cityFrom}-${cityTo}.pdf`).then(res => res.arrayBuffer())
     const ticketLayout = await import(`../src/layout-templates/${cityFrom}-${cityTo}.js`)
     const ticketPDFs = []
     const touristList = getTourists()
@@ -190,7 +190,7 @@ async function generateTickets() {
         const pdfDoc = await PDFDocument.load(ticket)
         pdfDoc.registerFontkit(fontkit)
 
-        const golosTextBytes = await fetch('src/fonts/GolosText-Regular.ttf').then(res => res.arrayBuffer())
+        const golosTextBytes = await fetch('fonts/GolosText-Regular.ttf').then(res => res.arrayBuffer())
         const golosText = await pdfDoc.embedFont(golosTextBytes)
 
         const pages = pdfDoc.getPages()
@@ -240,7 +240,7 @@ function drawTicketLayout(page, layout, tourist, font) {
 async function generateBooking() {
     const cityTo = document.getElementById('city-to').value
 
-    const booking = await fetch(`src/pdf-templates/booking-${cityTo}.pdf`).then(res => res.arrayBuffer())
+    const booking = await fetch(`pdf-templates/booking-${cityTo}.pdf`).then(res => res.arrayBuffer())
     const bookingLayout = await import(`../src/layout-templates/${cityTo}.js`)
     const bookingPDFs = []
     const touristList = getTourists()
@@ -249,7 +249,7 @@ async function generateBooking() {
         const pdfDoc = await PDFDocument.load(booking)
             pdfDoc.registerFontkit(fontkit)
     
-            const verdanaBytes = await fetch('src/fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
+            const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
             const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
     
             const pages = pdfDoc.getPages()
@@ -263,7 +263,7 @@ async function generateBooking() {
             const pdfDoc = await PDFDocument.load(booking)
             pdfDoc.registerFontkit(fontkit)
     
-            const verdanaBytes = await fetch('src/fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
+            const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
             const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
     
             const pages = pdfDoc.getPages()
@@ -278,7 +278,7 @@ async function generateBooking() {
             const pdfDoc = await PDFDocument.load(booking)
             pdfDoc.registerFontkit(fontkit)
     
-            const verdanaBytes = await fetch('src/fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
+            const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
             const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
     
             const pages = pdfDoc.getPages()
