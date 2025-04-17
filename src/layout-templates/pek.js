@@ -1,5 +1,9 @@
 import { rgb } from 'pdf-lib'
-import { randomNumber, dateFormat } from '../formats.js'
+import {
+    randomNumber,
+    dateFormat,
+    dayCount,
+} from '../formats.js'
 
 
 export const pek = [
@@ -14,7 +18,7 @@ export const pek = [
         size: 9,
         textColor: rgb(0, 0.61, 1),
         description: 'Код подтверждения',
-        content: 'randomNumber("0000") + "." + randomNumber("000") + "." + randomNumber("000")'
+        content: () => randomNumber("0000") + "." + randomNumber("000") + "." + randomNumber("000")
     },
     {
         width: 60,
@@ -27,7 +31,7 @@ export const pek = [
         size: 9,
         textColor: rgb(0, 0.61, 1),
         description: 'ПИН-код',
-        content: 'randomNumber("0000")'
+        content: () => randomNumber("0000")
     },
     {
         width: 35,
@@ -40,7 +44,7 @@ export const pek = [
         size: 18.5,
         textColor: rgb(0, 0, 0),
         description: 'Заезд - день',
-        content: 'dateFormat(dateFrom.value).day'
+        content: (ctx) => dateFormat(ctx.dateFrom.value).day
     },
     {
         width: 35,
@@ -53,7 +57,7 @@ export const pek = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Заезд - месяц',
-        content: 'dateFormat(dateFrom.value).monthName.en'
+        content: (ctx) => dateFormat(ctx.dateFrom.value).monthName.ru
     },
     {
         width: 35,
@@ -66,7 +70,7 @@ export const pek = [
         size: 7,
         textColor: rgb(0.5, 0.5, 0.5),
         description: 'Заезд - день недели',
-        content: 'dateFormat(dateFrom.value).weekday.en'
+        content: (ctx) => dateFormat(ctx.dateFrom.value).weekday.ru
     },
     {
         width: 35,
@@ -79,7 +83,7 @@ export const pek = [
         size: 18.5,
         textColor: rgb(0, 0, 0),
         description: 'Выезд - день',
-        content: 'dateFormat(dateTo.value).day'
+        content: (ctx) => dateFormat(ctx.dateTo.value).day
     },
     {
         width: 35,
@@ -92,7 +96,7 @@ export const pek = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Выезд - месяц',
-        content: 'dateFormat(dateTo.value).monthName.en'
+        content: (ctx) => dateFormat(ctx.dateTo.value).monthName.ru
     },
     {
         width: 35,
@@ -105,7 +109,7 @@ export const pek = [
         size: 7,
         textColor: rgb(0.5, 0.5, 0.5),
         description: 'Выезд - день недели',
-        content: 'dateFormat(dateTo.value).weekday.en'
+        content: (ctx) => dateFormat(ctx.dateTo.value).weekday.ru
     },
     {
         width: 30,
@@ -118,7 +122,7 @@ export const pek = [
         size: 18.5,
         textColor: rgb(0, 0, 0),
         description: 'Кол-во ночей',
-        content: 'String(dayCount(dateFrom.value, dateTo.value))'
+        content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
     },
     {
         width: 160,

@@ -1,5 +1,13 @@
 import { rgb } from 'pdf-lib'
-import { randomNumber, dateFormat } from '../formats.js'
+import {
+    randomNumber,
+    dateFormat,
+    dayCount,
+    standartDate,
+    monthNameDate,
+    today,
+    monthNameDateOnly
+} from '../formats.js'
 
 
 export const vvopek = [
@@ -14,7 +22,7 @@ export const vvopek = [
         size: 14,
         textColor: rgb(0, 0, 0),
         description: 'Номер заказа',
-        content: '"№ " + randomNumber("0000000000")'
+        content: () => "№ " + randomNumber("0000000000")
     },
     {
         width: 290,
@@ -27,7 +35,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Номер заказа',
-        content: 'tourist.name'
+        content: (ctx) => ctx.tourist.name
     },
     {
         width: 100,
@@ -40,7 +48,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Дата рождения',
-        content: 'monthNameDate(tourist.date, "ru")'
+        content: (ctx) => monthNameDate(ctx.tourist.date, "ru")
     },
     {
         width: 100,
@@ -53,7 +61,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Паспорт',
-        content: 'tourist.passport'
+        content: (ctx) => ctx.tourist.passport
     },
     {
         width: 60,
@@ -66,7 +74,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Номер брони 1',
-        content: 'randomNumber("AA0A0A")'
+        content: () => randomNumber("AA0A0A")
     },
     {
         width: 60,
@@ -79,7 +87,7 @@ export const vvopek = [
         size: 7.3,
         textColor: rgb(0, 0, 0),
         description: 'Дата вылета',
-        content: 'monthNameDate(dateFrom.value, "ru")'
+        content: (ctx) => monthNameDate(ctx.dateFrom.value, "ru")
     },
     {
         width: 60,
@@ -92,7 +100,7 @@ export const vvopek = [
         size: 7.3,
         textColor: rgb(0, 0, 0),
         description: 'Дата посадки',
-        content: 'monthNameDate(dateFrom.value, "ru")'
+        content: (ctx) => monthNameDate(ctx.dateFrom.value, "ru")
     },
     {
         width: 60,
@@ -105,7 +113,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Номер брони 2',
-        content: 'randomNumber("AA0A0A")'
+        content: () => randomNumber("AA0A0A")
     },
     {
         width: 60,
@@ -118,7 +126,7 @@ export const vvopek = [
         size: 7.3,
         textColor: rgb(0, 0, 0),
         description: 'Дата вылета',
-        content: 'monthNameDate(dateTo.value, "ru")'
+        content: (ctx) => monthNameDate(ctx.dateTo.value, "ru")
     },
     {
         width: 60,
@@ -131,7 +139,7 @@ export const vvopek = [
         size: 7.3,
         textColor: rgb(0, 0, 0),
         description: 'Дата посадки',
-        content: 'monthNameDate(dateTo.value, "ru")'
+        content: (ctx) => monthNameDate(ctx.dateTo.value, "ru")
     },
     {
         width: 60,
@@ -144,7 +152,7 @@ export const vvopek = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Дата покупки',
-        content: 'monthNameDate(today(), "ru")'
+        content: () => monthNameDate(today(), "ru")
     },
     {
         width: 30,
@@ -157,6 +165,6 @@ export const vvopek = [
         size: 7.5,
         textColor: rgb(0.2, 0.2, 0.2),
         description: 'Дата покупки',
-        content: '"*" + randomNumber("0000")'
+        content: () => "*" + randomNumber("0000")
     },
 ]

@@ -23,18 +23,6 @@ import fontkit from '@pdf-lib/fontkit'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 
-window.removeTourist = removeTourist
-window.getTourists = getTourists
-window.addTourist = addTourist
-
-window.randomNumber = randomNumber
-window.dateFormat = dateFormat
-window.dayCount = dayCount
-window.standartDate = standartDate
-window.monthNameDate = monthNameDate
-window.today = today
-window.monthNameDateOnly = monthNameDateOnly
-
 const templates = [
     // {
     //     layout: {
@@ -79,7 +67,7 @@ const templates = [
 
 //     for (let i = 0; i < listPdfBytes.length; i++) {
 //         const pdfDoc = await PDFDocument.load(listPdfBytes[i])
-        
+
 //         pdfDoc.registerFontkit(fontkit)
 //         const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
 //         const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
@@ -118,12 +106,12 @@ export async function generateAll() {
     const insurance = await fetch(`pdf-templates/${insSelect}.pdf`).then(res => res.arrayBuffer())
     const route = await fetch(`pdf-templates/route-${cityTo}.pdf`).then(res => res.arrayBuffer())
 
-    const listPdfBytes = [ insurance, route]
+    const listPdfBytes = [insurance, route]
     const modifiedPDFs = []
 
     for (let i = 0; i < listPdfBytes.length; i++) {
         const pdfDoc = await PDFDocument.load(listPdfBytes[i])
-        
+
         pdfDoc.registerFontkit(fontkit)
         const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
         const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
@@ -157,11 +145,13 @@ export async function generateAll() {
 
 
 function drawLayout(page, layout, font) {
-    const cityFrom = document.getElementById('city-from')
-    const cityTo = document.getElementById('city-to')
-    const dateFrom = document.getElementById('date-from')
-    const dateTo = document.getElementById('date-to')
-    const touristList = getTourists()
+    const context = {
+        cityFrom: document.getElementById('city-from'),
+        cityTo: document.getElementById('city-to'),
+        dateFrom: document.getElementById('date-from'),
+        dateTo: document.getElementById('date-to'),
+        touristList: getTourists()
+    }
 
     for (let i = 0; i < layout.length; i++) {
         page.drawRectangle({
@@ -172,17 +162,17 @@ function drawLayout(page, layout, font) {
             color: layout[i].bgColor
         })
 
+        const rawContent = layout[i].content
+        const value = typeof rawContent === 'function' ? rawContent(context) : rawContent
+        const displayText = value !== undefined && value !== null ? value : '';
 
-
-        if (eval(layout[i].content) != undefined || eval(layout[i].content) != null) {
-            page.drawText(eval(layout[i].content), {
-                x: layout[i].textX,
-                y: layout[i].textY,
-                size: layout[i].size,
-                color: layout[i].textColor,
-                font: font
-            })
-        }
+        page.drawText(String(displayText), {
+            x: layout[i].textX,
+            y: layout[i].textY,
+            size: layout[i].size,
+            color: layout[i].textColor,
+            font: font
+        })
     }
 }
 
@@ -222,11 +212,39 @@ async function generateTickets() {
 
 // ОТРИСОВКА БИЛЕТОВ
 
+// function drawTicketLayout(page, layout, tourist, font) {
+//     const cityFrom = document.getElementById('city-from')
+//     const cityTo = document.getElementById('city-to')
+//     const dateFrom = document.getElementById('date-from')
+//     const dateTo = document.getElementById('date-to')
+
+//     for (let i = 0; i < layout.length; i++) {
+//         page.drawRectangle({
+//             width: layout[i].width,
+//             height: layout[i].height,
+//             x: layout[i].x,
+//             y: layout[i].y,
+//             color: layout[i].bgColor
+//         })
+
+//         page.drawText(eval(layout[i].content), {
+//             x: layout[i].textX,
+//             y: layout[i].textY,
+//             size: layout[i].size,
+//             color: layout[i].textColor,
+//             font: font
+//         })
+//     }
+// }
+
 function drawTicketLayout(page, layout, tourist, font) {
-    const cityFrom = document.getElementById('city-from')
-    const cityTo = document.getElementById('city-to')
-    const dateFrom = document.getElementById('date-from')
-    const dateTo = document.getElementById('date-to')
+    const context = {
+        cityFrom: document.getElementById('city-from'),
+        cityTo: document.getElementById('city-to'),
+        dateFrom: document.getElementById('date-from'),
+        dateTo: document.getElementById('date-to'),
+        tourist: tourist
+    }
 
     for (let i = 0; i < layout.length; i++) {
         page.drawRectangle({
@@ -237,7 +255,10 @@ function drawTicketLayout(page, layout, tourist, font) {
             color: layout[i].bgColor
         })
 
-        page.drawText(eval(layout[i].content), {
+        const rawContent = layout[i].content
+        const value = typeof rawContent === 'function' ? rawContent(context) : rawContent
+
+        page.drawText(String(value), {
             x: layout[i].textX,
             y: layout[i].textY,
             size: layout[i].size,
@@ -259,29 +280,29 @@ async function generateBooking() {
 
     if (touristList.length <= 2) {
         const pdfDoc = await PDFDocument.load(booking)
-            pdfDoc.registerFontkit(fontkit)
-    
-            const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
-            const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-    
-            const pages = pdfDoc.getPages()
-            const firstPage = pages[0]
-            drawLayout(firstPage, bookingLayout[`${cityTo}`], verdanaBold)
-    
-            const pdfBytes = await pdfDoc.save()
-            bookingPDFs.push(pdfBytes)
+        pdfDoc.registerFontkit(fontkit)
+
+        const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
+        const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
+
+        const pages = pdfDoc.getPages()
+        const firstPage = pages[0]
+        drawLayout(firstPage, bookingLayout[`${cityTo}`], verdanaBold)
+
+        const pdfBytes = await pdfDoc.save()
+        bookingPDFs.push(pdfBytes)
     } else if (touristList.length <= 4) {
         for (let i = 0; i < 2; i++) {
             const pdfDoc = await PDFDocument.load(booking)
             pdfDoc.registerFontkit(fontkit)
-    
+
             const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
             const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-    
+
             const pages = pdfDoc.getPages()
             const firstPage = pages[0]
             drawLayout(firstPage, bookingLayout[`${cityTo}`], verdanaBold)
-    
+
             const pdfBytes = await pdfDoc.save()
             bookingPDFs.push(pdfBytes)
         }
@@ -289,14 +310,14 @@ async function generateBooking() {
         for (let i = 0; i < 3; i++) {
             const pdfDoc = await PDFDocument.load(booking)
             pdfDoc.registerFontkit(fontkit)
-    
+
             const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
             const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-    
+
             const pages = pdfDoc.getPages()
             const firstPage = pages[0]
             drawLayout(firstPage, bookingLayout[`${cityTo}`], verdanaBold)
-    
+
             const pdfBytes = await pdfDoc.save()
             bookingPDFs.push(pdfBytes)
         }

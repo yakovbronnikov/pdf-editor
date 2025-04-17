@@ -1,5 +1,13 @@
 import { rgb } from 'pdf-lib'
-import { randomNumber, dateFormat } from '../formats.js'
+import {
+    randomNumber,
+    dateFormat,
+    dayCount,
+    standartDate,
+    monthNameDate,
+    today,
+    monthNameDateOnly
+} from '../formats.js'
 
 
 export const euroins = [
@@ -14,7 +22,7 @@ export const euroins = [
         size: 9,
         textColor: rgb(0, 0, 0),
         description: 'Серийный номер',
-        content: '"E0050-" + randomNumber("000000000")'
+        content: () => "E0050-" + randomNumber("000000000")
     },
     {
         width: 205,
@@ -27,7 +35,7 @@ export const euroins = [
         size: 7.2,
         textColor: rgb(0, 0, 0),
         description: 'Страхователь',
-        content: 'touristList[0].name'
+        content: (ctx) => ctx.touristList[0].name
     },
     {
         width: 60,
@@ -40,7 +48,7 @@ export const euroins = [
         size: 7.2,
         textColor: rgb(0, 0, 0),
         description: 'Дата рождения',
-        content: 'standartDate(touristList[0].date)'
+        content: (ctx) => standartDate(ctx.touristList[0].date)
     },
     {
         width: 75,
@@ -53,7 +61,7 @@ export const euroins = [
         size: 7.2,
         textColor: rgb(0, 0, 0),
         description: 'Паспорт №',
-        content: 'touristList[0].passport'
+        content: (ctx) => ctx.touristList[0].passport
     },
     {
         width: 14,
@@ -66,7 +74,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№1',
-        content: '"1"'
+        content: '1'
     },
     {
         width: 106,
@@ -79,7 +87,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№1 Имя',
-        content: 'touristList[0].name'
+        content: (ctx) => ctx.touristList[0].name
     },
     {
         width: 48,
@@ -92,7 +100,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№1 Дата',
-        content: 'standartDate(touristList[0].date)'
+        content: (ctx) => standartDate(ctx.touristList[0].date)
     },
     {
         width: 14,
@@ -105,7 +113,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№2',
-        content: 'if(touristList[1] != undefined){"2"}'
+        content: (ctx) => ctx.touristList[1] != undefined ? "2" : ""
     },
     {
         width: 106,
@@ -118,7 +126,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№2 Имя',
-        content: 'if(touristList[1] != undefined){touristList[1].name}'
+        content: (ctx) => ctx.touristList[1] != undefined ? ctx.touristList[1].name : ""
     },
     {
         width: 48,
@@ -131,7 +139,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№2 Дата',
-        content: 'if(touristList[1] != undefined){standartDate(touristList[1].date)}',
+        content: (ctx) => ctx.touristList[1] != undefined ? standartDate(ctx.touristList[1].date) : ""
     },
     {
         width: 14,
@@ -144,7 +152,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№3',
-        content: 'if(touristList[2] != undefined){"3"}'
+        content: (ctx) => ctx.touristList[2] != undefined ? "3" : ""
     },
     {
         width: 106,
@@ -157,7 +165,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№3 Имя',
-        content: 'if(touristList[2] != undefined){touristList[2].name}'
+        content: (ctx) => ctx.touristList[2] != undefined ? ctx.touristList[2].name : ""
     },
     {
         width: 48,
@@ -170,7 +178,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№3 Дата',
-        content: 'if(touristList[2] != undefined){standartDate(touristList[2].date)}'
+        content: (ctx) => ctx.touristList[2] != undefined ? standartDate(ctx.touristList[2].date) : ""
     },
     {
         width: 14,
@@ -183,7 +191,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№4',
-        content: 'if(touristList[3] != undefined){"4"}'
+        content: (ctx) => ctx.touristList[3] != undefined ? "4" : ""
     },
     {
         width: 106,
@@ -196,7 +204,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№4 Имя',
-        content: 'if(touristList[3] != undefined){touristList[3].name}'
+        content: (ctx) => ctx.touristList[3] != undefined ? ctx.touristList[3].name : ""
     },
     {
         width: 48,
@@ -209,7 +217,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№4 Дата',
-        content: 'if(touristList[3] != undefined){standartDate(touristList[3].date)}'
+        content: (ctx) => ctx.touristList[3] != undefined ? standartDate(ctx.touristList[3].date) : ""
     },
     {
         width: 14,
@@ -222,7 +230,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№5',
-        content: 'if(touristList[4] != undefined){"5"}'
+        content: (ctx) => ctx.touristList[4] != undefined ? "5" : ""
     },
     {
         width: 106,
@@ -235,7 +243,7 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№5 Имя',
-        content: 'if(touristList[4] != undefined){touristList[4].name}'
+        content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].name : ""
     },
     {
         width: 48,
@@ -248,32 +256,8 @@ export const euroins = [
         size: 6.2,
         textColor: rgb(0, 0, 0),
         description: '№5 Дата',
-        content: 'if(touristList[4] != undefined){standartDate(touristList[4].date)}'
+        content: (ctx) => ctx.touristList[4] != undefined ? standartDate(ctx.touristList[4].date) : ""
     },
-    // {
-    //     width: 186,
-    //     height: 14,
-    //     x: 379,
-    //     y: 770,
-    //     bgColor: rgb(1, 1, 1),
-    //     textX: 381, 
-    //     textY: 775.2,
-    //     size: 7.2,
-    //     textColor: rgb(0, 0, 0),
-    //     description: 'Адрес'
-    // },
-    // {
-    //     width: 160,
-    //     height: 14,
-    //     x: 379,
-    //     y: 751,
-    //     bgColor: rgb(1, 1, 1),
-    //     textX: 381, 
-    //     textY: 756,
-    //     size: 7.2,
-    //     textColor: rgb(0, 0, 0),
-    //     description: 'Терриитория действия'
-    // },
     {
         width: 48,
         height: 15,
@@ -285,7 +269,7 @@ export const euroins = [
         size: 7.2,
         textColor: rgb(0, 0, 0),
         description: 'Поездка с',
-        content: 'dateFormat(dateFrom.value).day + "." + dateFormat(dateFrom.value).month + "." + dateFormat(dateFrom.value).year'
+        content: (ctx) => standartDate(ctx.dateFrom.value)
     },
     {
         width: 48,
@@ -298,7 +282,7 @@ export const euroins = [
         size: 7.2,
         textColor: rgb(0, 0, 0),
         description: 'Поездка до',
-        content: 'dateFormat(dateTo.value).day + "." + dateFormat(dateTo.value).month + "." + dateFormat(dateTo.value).year'
+        content: (ctx) => standartDate(ctx.dateTo.value)
     },
     {
         width: 25,
@@ -311,7 +295,7 @@ export const euroins = [
         size: 7.2,
         textColor: rgb(0, 0, 0),
         description: 'Количество дней',
-        content: 'String(dayCount(dateFrom.value, dateTo.value))'
+        content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
     },
     {
         width: 100,
@@ -324,6 +308,6 @@ export const euroins = [
         size: 7.2,
         textColor: rgb(0, 0, 0),
         description: 'Страхователь',
-        content: 'standartDate(today(), "en")'
+        content: () => standartDate(today(), "en")
     },
 ]

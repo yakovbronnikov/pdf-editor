@@ -1,5 +1,13 @@
 import { rgb } from 'pdf-lib'
-import { randomNumber, dateFormat } from '../formats.js'
+import {
+    randomNumber,
+    dateFormat,
+    dayCount,
+    standartDate,
+    monthNameDate,
+    today,
+    monthNameDateOnly
+} from '../formats.js'
 
 
 export const tit = [
@@ -14,7 +22,7 @@ export const tit = [
         size: 8.5,
         textColor: rgb(0, 0, 0),
         description: 'Номер полиса',
-        content: '"№ UBK_DG_VZR25-01/25/02/" + randomNumber("000000")'
+        content: () => "№ UBK_DG_VZR25-01/25/02/" + randomNumber("000000")
     },
     {
         width: 60,
@@ -27,7 +35,7 @@ export const tit = [
         size: 7,
         textColor: rgb(0, 0, 0),
         description: 'Дата выдачи',
-        content: 'standartDate(today())'
+        content: () => standartDate(today())
     },
     {
         width: 200,
@@ -40,7 +48,7 @@ export const tit = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Cтрахователь',
-        content: 'touristList[0].name + ", " + standartDate(touristList[0].date)'
+        content: (ctx) => ctx.touristList[0].name + ", " + standartDate(ctx.touristList[0].date)
     },
     {
         width: 90,
@@ -53,7 +61,7 @@ export const tit = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Паспорт срахователя',
-        content: 'touristList[0].passport'
+        content: (ctx) => ctx.touristList[0].passport
     },
     {
         width: 200,
@@ -66,7 +74,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№1 Имя',
-        content: 'touristList[0].name'
+        content: (ctx) => ctx.touristList[0].name
     },
     {
         width: 60,
@@ -79,7 +87,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№1 дата',
-        content: 'standartDate(touristList[0].date)'
+        content: (ctx) => standartDate(ctx.touristList[0].date)
     },
     {
         width: 60,
@@ -92,7 +100,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№1 паспорт',
-        content: 'touristList[0].passport'
+        content: (ctx) => ctx.touristList[0].passport
     },
     {
         width: 200,
@@ -105,7 +113,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№2 Имя',
-        content: 'if(touristList[1] != undefined){touristList[1].name}'
+        content: (ctx) => ctx.touristList[1] != undefined ? ctx.touristList[1].name : ""
     },
     {
         width: 60,
@@ -118,7 +126,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№2 дата',
-        content: 'if(touristList[1] != undefined){standartDate(touristList[1].date)}'
+        content: (ctx) => ctx.touristList[1] != undefined ? standartDate(ctx.touristList[1].date) : ""
     },
     {
         width: 60,
@@ -131,7 +139,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№2 паспорт',
-        content: 'if(touristList[1] != undefined){touristList[1].passport}'
+        content: (ctx) => ctx.touristList[1] != undefined ? ctx.touristList[1].passport : ""
     },
     {
         width: 200,
@@ -144,7 +152,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№3 Имя',
-        content: 'if(touristList[2] != undefined){touristList[2].name}'
+        content: (ctx) => ctx.touristList[2] != undefined ? ctx.touristList[2].name : ""
     },
     {
         width: 60,
@@ -157,7 +165,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№3 дата',
-        content: 'if(touristList[2] != undefined){standartDate(touristList[2].date)}'
+        content: (ctx) => ctx.touristList[2] != undefined ? standartDate(ctx.touristList[2].date) : ""
     },
     {
         width: 60,
@@ -170,7 +178,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№3 паспорт',
-        content: 'if(touristList[2] != undefined){touristList[2].passport}'
+        content: (ctx) => ctx.touristList[2] != undefined ? ctx.touristList[2].passport : ""
     },
     {
         width: 200,
@@ -183,7 +191,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№4 Имя',
-        content: 'if(touristList[3] != undefined){touristList[3].name}'
+        content: (ctx) => ctx.touristList[3] != undefined ? ctx.touristList[3].name : ""
     },
     {
         width: 60,
@@ -196,7 +204,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№4 дата',
-        content: 'if(touristList[3] != undefined){standartDate(touristList[3].date)}'
+        content: (ctx) => ctx.touristList[3] != undefined ? standartDate(ctx.touristList[3].date) : ""
     },
     {
         width: 60,
@@ -209,7 +217,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№4 паспорт',
-        content: 'if(touristList[3] != undefined){touristList[3].passport}'
+        content: (ctx) => ctx.touristList[3] != undefined ? ctx.touristList[3].passport : ""
     },
     {
         width: 200,
@@ -222,7 +230,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№5 Имя',
-        content: 'if(touristList[4] != undefined){touristList[4].name}'
+        content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].name : ""
     },
     {
         width: 60,
@@ -235,7 +243,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№5 дата',
-        content: 'if(touristList[4] != undefined){standartDate(touristList[4].date)}'
+        content: (ctx) => ctx.touristList[4] != undefined ? standartDate(ctx.touristList[4].date) : ""
     },
     {
         width: 60,
@@ -248,7 +256,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№5 паспорт',
-        content: 'if(touristList[4] != undefined){touristList[4].passport}'
+        content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].passport : ""
     },
     {
         width: 105,
@@ -261,6 +269,6 @@ export const tit = [
         size: 7,
         textColor: rgb(0, 0, 0),
         description: 'Срок страхования',
-        content: 'standartDate(dateFrom.value) + " - " + standartDate(dateFrom.value)'
+        content: (ctx) => standartDate(ctx.dateFrom.value) + " - " + standartDate(ctx.dateFrom.value)
     },
 ]

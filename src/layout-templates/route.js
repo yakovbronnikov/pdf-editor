@@ -1,5 +1,13 @@
 import { rgb } from 'pdf-lib'
-import { randomNumber, dateFormat } from '../formats.js'
+import {
+    randomNumber,
+    dateFormat,
+    dayCount,
+    standartDate,
+    monthNameDate,
+    today,
+    monthNameDateOnly
+} from '../formats.js'
 
 
 export const route = [
@@ -9,7 +17,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№1',
-        content: '"1."'
+        content: '1.'
     },
     {
         textX: 112, 
@@ -17,7 +25,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№1 Имя',
-        content: 'touristList[0].name'
+        content: (ctx) => ctx.touristList[0].name
     },
     {
         textX: 396, 
@@ -25,7 +33,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№1 Паспорт',
-        content: 'touristList[0].passport'
+        content: (ctx) => ctx.touristList[0].passport
     },
     {
         textX: 84, 
@@ -33,7 +41,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№2',
-        content: 'if(touristList[1] != undefined){"2."}'
+        content: (ctx) => ctx.touristList[1] != undefined ? "2." : ""
     },
     {
         textX: 112, 
@@ -41,7 +49,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№2 Имя',
-        content: 'if(touristList[1] != undefined){touristList[1].name}'
+        content: (ctx) => ctx.touristList[1] != undefined ? ctx.touristList[1].name : ""
     },
     {
         textX: 396, 
@@ -49,7 +57,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№2 Паспорт',
-        content: 'if(touristList[1] != undefined){touristList[1].passport}'
+        content: (ctx) => ctx.touristList[1] != undefined ? ctx.touristList[1].passport : ""
     },
     {
         textX: 84, 
@@ -57,7 +65,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№3',
-        content: 'if(touristList[2] != undefined){"3."}'
+        content: (ctx) => ctx.touristList[2] != undefined ? "3." : ""
     },
     {
         textX: 112, 
@@ -65,7 +73,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№3 Имя',
-        content: 'if(touristList[2] != undefined){touristList[2].name}'
+        content: (ctx) => ctx.touristList[2] != undefined ? ctx.touristList[2].name : ""
     },
     {
         textX: 396, 
@@ -73,7 +81,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№3 Паспорт',
-        content: 'if(touristList[2] != undefined){touristList[2].passport}'
+        content: (ctx) => ctx.touristList[2] != undefined ? ctx.touristList[2].passport : ""
     },
     {
         textX: 84, 
@@ -81,7 +89,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№4',
-        content: 'if(touristList[3] != undefined){"4."}'
+        content: (ctx) => ctx.touristList[3] != undefined ? "4." : ""
     },
     {
         textX: 112, 
@@ -89,7 +97,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№4 Имя',
-        content: 'if(touristList[3] != undefined){touristList[3].name}'
+        content: (ctx) => ctx.touristList[3] != undefined ? ctx.touristList[3].name : ""
     },
     {
         textX: 396, 
@@ -97,7 +105,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№4 Паспорт',
-        content: 'if(touristList[3] != undefined){touristList[3].passport}'
+        content: (ctx) => ctx.touristList[3] != undefined ? standartDate(ctx.touristList[3].date) : ""
     },
     {
         textX: 84, 
@@ -105,7 +113,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№5',
-        content: 'if(touristList[4] != undefined){"5."}'
+        content: (ctx) => ctx.touristList[4] != undefined ? "5." : ""
     },
     {
         textX: 112, 
@@ -113,7 +121,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№5 Имя',
-        content: 'if(touristList[4] != undefined){touristList[4].name}'
+        content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].name : ""
     },
     {
         textX: 396, 
@@ -121,7 +129,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№5 Паспорт',
-        content: 'if(touristList[4] != undefined){touristList[4].passport}'
+        content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].passport : ""
     },
     {
         textX: 84, 
@@ -129,7 +137,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№6',
-        content: 'if(touristList[5] != undefined){"6."}'
+        content: (ctx) => ctx.touristList[5] != undefined ? "6." : ""
     },
     {
         textX: 112, 
@@ -137,7 +145,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№6 Имя',
-        content: 'if(touristList[5] != undefined){touristList[5].name}'
+        content: (ctx) => ctx.touristList[5] != undefined ? ctx.touristList[5].name : ""
     },
     {
         textX: 396, 
@@ -145,7 +153,7 @@ export const route = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: '№6 Паспорт',
-        content: 'if(touristList[5] != undefined){touristList[5].passport}'
+        content: (ctx) => ctx.touristList[5] != undefined ? ctx.touristList[5].passport : ""
     },
     {
         textX: 305, 
@@ -153,7 +161,7 @@ export const route = [
         size: 11,
         textColor: rgb(0, 0, 0),
         description: 'Дата с',
-        content: 'standartDate(dateFrom.value)'
+        content: (ctx) => standartDate(ctx.dateFrom.value)
     },
     {
         textX: 305, 
@@ -161,7 +169,7 @@ export const route = [
         size: 11,
         textColor: rgb(0, 0, 0),
         description: 'Дата с',
-        content: 'standartDate(dateFrom.value) + " - " + standartDate(dateTo.value)'
+        content: (ctx) => standartDate(ctx.dateFrom.value) + " - " + standartDate(ctx.dateTo.value)
     },
     {
         textX: 305, 
@@ -169,6 +177,6 @@ export const route = [
         size: 11,
         textColor: rgb(0, 0, 0),
         description: 'Дата с',
-        content: 'standartDate(dateTo.value)'
+        content: (ctx) => standartDate(ctx.dateTo.value)
     },
 ]

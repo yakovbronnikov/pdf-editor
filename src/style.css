@@ -166,6 +166,8 @@ input[type='date']:valid {
   color: var(--white);
   cursor: pointer;
   transition: 200ms;
+  text-align: center;
+  text-decoration: none;
 }
 
 
@@ -174,8 +176,6 @@ input[type='date']:valid {
 }
 
 .button-link {
-  text-align: center;
-  text-decoration: none;
   color: var(--info);
   background: var(--white);
 }
@@ -286,31 +286,40 @@ input[type='date']:valid {
   #app {
     height: auto;
     flex-direction: column;
+    align-items: center;
   }
 
   .page {
     height: auto;
     display: flex;
     overflow-y: hidden;
+    box-shadow: none;
+    border-right: none;
   }
 
-  #preview {
-    height: 800px;
+  .preview {
+    border-top: 1px solid var(--bg-field-hover);
+    box-shadow: inset 12px 0px 24px rgba(0,0,0,0.1);
   }
 
-  .page_wrapper {
-    padding-bottom: 120px;
-  }
 }
 
 @media (max-width: 560px) {
 
-  .page_wrapper {
+  .page {
     padding: 24px;
     padding-bottom: 80px;
   }
 
-  #preview {
-    height: 400px;
+  .preview {
+    padding: 64px 24px;
+  }
+
+  .preview iframe {
+    min-height: 360px;
+  }
+
+  .input-group {
+    flex-direction: column;
   }
 }

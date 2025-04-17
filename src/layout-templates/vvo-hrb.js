@@ -1,5 +1,14 @@
 import { rgb } from 'pdf-lib'
-import { randomNumber, dateFormat } from '../formats.js'
+import {
+    randomNumber,
+    dateFormat,
+    dayCount,
+    standartDate,
+    monthNameDate,
+    today,
+    monthNameDateOnly
+} from '../formats.js'
+
 
 
 export const vvohrb = [
@@ -14,7 +23,7 @@ export const vvohrb = [
         size: 16,
         textColor: rgb(0, 0, 0),
         description: 'Номер брони',
-        content: 'randomNumber("0A0A0A")'
+        content: () => randomNumber("0A0A0A")
     },
     {
         width: 230,
@@ -27,7 +36,7 @@ export const vvohrb = [
         size: 14,
         textColor: rgb(0, 0, 0),
         description: 'Имя туристa',
-        content: 'tourist.name'
+        content: (ctx) => ctx.tourist.name
     },
     {
         width: 60,
@@ -40,7 +49,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0, 0, 0),
         description: 'Паспорт',
-        content: 'tourist.passport'
+        content: (ctx) => ctx.tourist.passport
     },
     {
         width: 75,
@@ -53,7 +62,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0, 0, 0),
         description: 'Номер заказа',
-        content: 'randomNumber("000") + " " + randomNumber("0000000000")'
+        content: () => randomNumber("000") + " " + randomNumber("0000000000")
     },
     {
         width: 75,
@@ -66,7 +75,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0, 0, 0),
         description: 'Дата покупки',
-        content: 'monthNameDate(today(), "en")'
+        content: () => monthNameDate(today(), "en")
     },
     {
         width: 60,
@@ -79,7 +88,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0.35, 0.35, 0.35),
         description: 'Дата вылета',
-        content: 'monthNameDate(dateFrom.value, "en")'
+        content: (ctx) => monthNameDate(ctx.dateFrom.value, "en")
     },
     {
         width: 60,
@@ -92,7 +101,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0.35, 0.35, 0.35),
         description: 'Дата посадки',
-        content: 'monthNameDate(dateFrom.value, "en")'
+        content: (ctx) => monthNameDate(ctx.dateFrom.value, "en")
     },
     {
         width: 60,
@@ -105,7 +114,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0.35, 0.35, 0.35),
         description: 'Дата вылета',
-        content: 'monthNameDate(dateTo.value, "en")'
+        content: (ctx) => monthNameDate(ctx.dateTo.value, "en")
     },
     {
         width: 60,
@@ -118,6 +127,6 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0.35, 0.35, 0.35),
         description: 'Дата посадки',
-        content: 'monthNameDate(dateTo.value, "en")'
+        content: (ctx) => monthNameDate(ctx.dateTo.value, "en")
     },
 ]
