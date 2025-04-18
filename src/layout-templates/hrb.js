@@ -18,6 +18,7 @@ export const hrb = [
         size: 9,
         textColor: rgb(0, 0.61, 1),
         description: 'Код подтверждения',
+        font: 'robotoBold',
         content: () => randomNumber("0000") + "." + randomNumber("000") + "." + randomNumber("000")
     },
     {
@@ -31,6 +32,7 @@ export const hrb = [
         size: 9,
         textColor: rgb(0, 0.61, 1),
         description: 'ПИН-код',
+        font: 'robotoBold',
         content: () => randomNumber("0000")
     },
     {
@@ -39,11 +41,12 @@ export const hrb = [
         x: 343,
         y: 744,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 345, 
+        textX: 348.5, 
         textY: 746,
         size: 18.5,
         textColor: rgb(0, 0, 0),
         description: 'Заезд - день',
+        font: 'robotoBold',
         content: (ctx) => dateFormat(ctx.dateFrom.value).day
     },
     {
@@ -57,7 +60,8 @@ export const hrb = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Заезд - месяц',
-        content: (ctx) => dateFormat(ctx.dateFrom.value).monthName.ru
+        font: 'robotoBold',
+        content: (ctx) => dateFormat(ctx.dateFrom.value).monthName.ruCaps
     },
     {
         width: 60,
@@ -65,11 +69,12 @@ export const hrb = [
         x: 320,
         y: 721.5,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 342, 
+        textX: 345, 
         textY: 723.5,
         size: 7,
-        textColor: rgb(0.5, 0.5, 0.5),
+        textColor: rgb(0, 0, 0),
         description: 'Заезд - день недели',
+        font: 'Brygada1918',
         content: (ctx) => dateFormat(ctx.dateFrom.value).weekday.ru
     },
     {
@@ -78,11 +83,12 @@ export const hrb = [
         x: 425,
         y: 744,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 426, 
+        textX: 429.5, 
         textY: 746,
         size: 18.5,
         textColor: rgb(0, 0, 0),
         description: 'Выезд - день',
+        font: 'robotoBold',
         content: (ctx) => dateFormat(ctx.dateTo.value).day
     },
     {
@@ -96,7 +102,8 @@ export const hrb = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Выезд - месяц',
-        content: (ctx) => dateFormat(ctx.dateTo.value).monthName.ru
+        font: 'robotoBold',
+        content: (ctx) => dateFormat(ctx.dateTo.value).monthName.ruCaps
     },
     {
         width: 60,
@@ -104,12 +111,27 @@ export const hrb = [
         x: 400,
         y: 721.5,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 423, 
+        textX: 426, 
         textY: 723.5,
         size: 7,
-        textColor: rgb(0.5, 0.5, 0.5),
+        textColor: rgb(0, 0, 0),
         description: 'Выезд - день недели',
+        font: 'Brygada1918',
         content: (ctx) => dateFormat(ctx.dateTo.value).weekday.ru
+    },
+    {
+        width: 15,
+        height: 20,
+        x: 500,
+        y: 744,
+        bgColor: rgb(0.95, 0.95, 0.95),
+        textX: 499, 
+        textY: 746,
+        size: 18.5,
+        textColor: rgb(0, 0, 0),
+        description: 'Комнат',
+        font: 'robotoBold',
+        content: () => '1'
     },
     {
         width: 30,
@@ -122,6 +144,7 @@ export const hrb = [
         size: 18.5,
         textColor: rgb(0, 0, 0),
         description: 'Кол-во ночей',
+        font: 'robotoBold',
         content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
     },
     {

@@ -22,7 +22,7 @@ export function removeTourist(id) {
 
 export function addTourist() {
   let amount = document.querySelectorAll('.tourist')
-  if (amount.length == 6) { return }
+  if (amount.length == 5) { return }
 
   const touristList = document.getElementById('tourist-list')
   let template = document.createElement('div')

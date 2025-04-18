@@ -22,17 +22,9 @@ import { PDFDocument, StandardFonts, rgb, TextAlignment } from 'pdf-lib'
 import fontkit from '@pdf-lib/fontkit'
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
+import { loadFonts } from './fonts.js'
 
 const templates = [
-    // {
-    //     layout: {
-    //         pek: pek,
-    //         sha: sha,
-    //         hrb: hrb
-    //     },
-    //     name: 'Отель',
-    //     iframe: 'hotel-preview'
-    // },
     {
         layout: {
             euroins: euroins,
@@ -53,51 +45,6 @@ const templates = [
     }
 ]
 
-// export async function generateAll() {
-//     const insSelect = document.getElementById('template-insurance').value
-//     const cityFrom = document.getElementById('city-from').value
-//     const cityTo = document.getElementById('city-to').value
-
-//     const hotel = await fetch(`pdf-templates/booking-${cityTo}.pdf`).then(res => res.arrayBuffer())
-//     const insurance = await fetch(`pdf-templates/${insSelect}.pdf`).then(res => res.arrayBuffer())
-//     const route = await fetch(`pdf-templates/route-${cityTo}.pdf`).then(res => res.arrayBuffer())
-
-//     const listPdfBytes = [hotel, insurance, route]
-//     const modifiedPDFs = []
-
-//     for (let i = 0; i < listPdfBytes.length; i++) {
-//         const pdfDoc = await PDFDocument.load(listPdfBytes[i])
-
-//         pdfDoc.registerFontkit(fontkit)
-//         const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
-//         const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-//         const golosTextBytes = await fetch('fonts/GolosText-Regular.ttf').then(res => res.arrayBuffer())
-//         const golosText = await pdfDoc.embedFont(golosTextBytes)
-
-//         const pages = pdfDoc.getPages()
-//         const firstPage = pages[0]
-
-//         if (templates[i].name == 'Турмаршрут') {
-//             drawLayout(firstPage, templates[i].layout[cityTo], golosText)
-//         } else if (templates[i].name == 'Страховка') {
-//             drawLayout(firstPage, templates[i].layout[insSelect], verdanaBold)
-//         } else {
-//             drawLayout(firstPage, templates[i].layout[cityTo], verdanaBold)
-//         }
-
-//         const pdfBytes = await pdfDoc.save()
-//         modifiedPDFs.push(pdfBytes)
-
-//         const blob = new Blob([pdfBytes], { type: 'application/pdf' })
-//         const url = URL.createObjectURL(blob)
-//         document.getElementById(templates[i].iframe).src = url
-//     }
-
-//     generateTickets()
-
-//     return modifiedPDFs
-// }
-
 export async function generateAll() {
     const insSelect = document.getElementById('template-insurance').value
     const cityFrom = document.getElementById('city-from').value
@@ -110,24 +57,15 @@ export async function generateAll() {
     const modifiedPDFs = []
 
     for (let i = 0; i < listPdfBytes.length; i++) {
-        const pdfDoc = await PDFDocument.load(listPdfBytes[i])
-
-        pdfDoc.registerFontkit(fontkit)
-        const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
-        const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-        const golosTextBytes = await fetch('fonts/GolosText-Regular.ttf').then(res => res.arrayBuffer())
-        const golosText = await pdfDoc.embedFont(golosTextBytes)
-
-        const pages = pdfDoc.getPages()
-        const firstPage = pages[0]
+        const pdf = await getPdfPage(listPdfBytes[i])
 
         if (templates[i].name == 'Турмаршрут') {
-            drawLayout(firstPage, templates[i].layout[cityTo], golosText)
+            drawLayout(pdf.page, templates[i].layout[cityTo], pdf.fonts)
         } else if (templates[i].name == 'Страховка') {
-            drawLayout(firstPage, templates[i].layout[insSelect], verdanaBold)
+            drawLayout(pdf.page, templates[i].layout[insSelect], pdf.fonts)
         }
 
-        const pdfBytes = await pdfDoc.save()
+        const pdfBytes = await pdf.doc.save()
         modifiedPDFs.push(pdfBytes)
 
         const blob = new Blob([pdfBytes], { type: 'application/pdf' })
@@ -144,13 +82,14 @@ export async function generateAll() {
 
 
 
-function drawLayout(page, layout, font) {
+function drawLayout(page, layout, font, tourist) {
     const context = {
         cityFrom: document.getElementById('city-from'),
         cityTo: document.getElementById('city-to'),
         dateFrom: document.getElementById('date-from'),
         dateTo: document.getElementById('date-to'),
-        touristList: getTourists()
+        touristList: getTourists(),
+        tourist: tourist
     }
 
     for (let i = 0; i < layout.length; i++) {
@@ -171,7 +110,7 @@ function drawLayout(page, layout, font) {
             y: layout[i].textY,
             size: layout[i].size,
             color: layout[i].textColor,
-            font: font
+            font: font[layout[i].font] || font.default
         })
     }
 }
@@ -189,17 +128,9 @@ async function generateTickets() {
     const touristList = getTourists()
 
     for (let i = 0; i < touristList.length; i++) {
-        const pdfDoc = await PDFDocument.load(ticket)
-        pdfDoc.registerFontkit(fontkit)
-
-        const golosTextBytes = await fetch('fonts/GolosText-Regular.ttf').then(res => res.arrayBuffer())
-        const golosText = await pdfDoc.embedFont(golosTextBytes)
-
-        const pages = pdfDoc.getPages()
-        const firstPage = pages[0]
-        drawTicketLayout(firstPage, ticketLayout[`${cityFrom}${cityTo}`], touristList[i], golosText)
-
-        const pdfBytes = await pdfDoc.save()
+        const pdf = await getPdfPage(ticket)
+        drawLayout(pdf.page, ticketLayout[`${cityFrom}${cityTo}`], pdf.fonts, touristList[i])
+        const pdfBytes = await pdf.doc.save()
         ticketPDFs.push(pdfBytes)
     }
 
@@ -208,64 +139,6 @@ async function generateTickets() {
     document.getElementById('ticket-preview').src = url
 
     return ticketPDFs
-}
-
-// ОТРИСОВКА БИЛЕТОВ
-
-// function drawTicketLayout(page, layout, tourist, font) {
-//     const cityFrom = document.getElementById('city-from')
-//     const cityTo = document.getElementById('city-to')
-//     const dateFrom = document.getElementById('date-from')
-//     const dateTo = document.getElementById('date-to')
-
-//     for (let i = 0; i < layout.length; i++) {
-//         page.drawRectangle({
-//             width: layout[i].width,
-//             height: layout[i].height,
-//             x: layout[i].x,
-//             y: layout[i].y,
-//             color: layout[i].bgColor
-//         })
-
-//         page.drawText(eval(layout[i].content), {
-//             x: layout[i].textX,
-//             y: layout[i].textY,
-//             size: layout[i].size,
-//             color: layout[i].textColor,
-//             font: font
-//         })
-//     }
-// }
-
-function drawTicketLayout(page, layout, tourist, font) {
-    const context = {
-        cityFrom: document.getElementById('city-from'),
-        cityTo: document.getElementById('city-to'),
-        dateFrom: document.getElementById('date-from'),
-        dateTo: document.getElementById('date-to'),
-        tourist: tourist
-    }
-
-    for (let i = 0; i < layout.length; i++) {
-        page.drawRectangle({
-            width: layout[i].width,
-            height: layout[i].height,
-            x: layout[i].x,
-            y: layout[i].y,
-            color: layout[i].bgColor
-        })
-
-        const rawContent = layout[i].content
-        const value = typeof rawContent === 'function' ? rawContent(context) : rawContent
-
-        page.drawText(String(value), {
-            x: layout[i].textX,
-            y: layout[i].textY,
-            size: layout[i].size,
-            color: layout[i].textColor,
-            font: font
-        })
-    }
 }
 
 // ГЕНЕРАЦИЯ ОТЕЛЕЙ
@@ -279,47 +152,29 @@ async function generateBooking() {
     const touristList = getTourists()
 
     if (touristList.length <= 2) {
-        const pdfDoc = await PDFDocument.load(booking)
-        pdfDoc.registerFontkit(fontkit)
 
-        const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
-        const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-
-        const pages = pdfDoc.getPages()
-        const firstPage = pages[0]
-        drawLayout(firstPage, bookingLayout[`${cityTo}`], verdanaBold)
-
-        const pdfBytes = await pdfDoc.save()
+        const pdf = await getPdfPage(booking)
+        drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts)
+        const pdfBytes = await pdf.doc.save()
         bookingPDFs.push(pdfBytes)
+
     } else if (touristList.length <= 4) {
         for (let i = 0; i < 2; i++) {
-            const pdfDoc = await PDFDocument.load(booking)
-            pdfDoc.registerFontkit(fontkit)
 
-            const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
-            const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-
-            const pages = pdfDoc.getPages()
-            const firstPage = pages[0]
-            drawLayout(firstPage, bookingLayout[`${cityTo}`], verdanaBold)
-
-            const pdfBytes = await pdfDoc.save()
+            const pdf = await getPdfPage(booking)
+            drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts)
+            const pdfBytes = await pdf.doc.save()
             bookingPDFs.push(pdfBytes)
+
         }
     } else {
         for (let i = 0; i < 3; i++) {
-            const pdfDoc = await PDFDocument.load(booking)
-            pdfDoc.registerFontkit(fontkit)
 
-            const verdanaBytes = await fetch('fonts/Verdana-Bold.ttf').then(res => res.arrayBuffer())
-            const verdanaBold = await pdfDoc.embedFont(verdanaBytes)
-
-            const pages = pdfDoc.getPages()
-            const firstPage = pages[0]
-            drawLayout(firstPage, bookingLayout[`${cityTo}`], verdanaBold)
-
-            const pdfBytes = await pdfDoc.save()
+            const pdf = await getPdfPage(booking)
+            drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts)
+            const pdfBytes = await pdf.doc.save()
             bookingPDFs.push(pdfBytes)
+
         }
     }
 
@@ -334,17 +189,18 @@ async function generateBooking() {
 // СОЗДАНИЕ И СОХРАНЕНИЕ АРХИВА
 
 export async function createZip() {
-    const zip = new JSZip()
-    const ticketFolder = zip.folder('Билеты')
-    const bookingFolder = zip.folder('Отели')
+    const zip =
+        new JSZip(),
+        ticketFolder = zip.folder('Билеты'),
+        bookingFolder = zip.folder('Отели'),
 
-    const pdfBuffers = await generateAll()
-    const tickets = await generateTickets()
-    const booking = await generateBooking()
+        pdfBuffers = await generateAll(),
+        tickets = await generateTickets(),
+        booking = await generateBooking(),
 
-    const cityFrom = document.getElementById('city-from').value
-    const cityTo = document.getElementById('city-to').value
-    const tourists = getTourists()
+        cityFrom = document.getElementById('city-from').value,
+        cityTo = document.getElementById('city-to').value,
+        tourists = getTourists()
 
     pdfBuffers.forEach((pdfBytes, index) => {
         zip.file(`${templates[index].name}.pdf`, pdfBytes)
@@ -361,3 +217,31 @@ export async function createZip() {
     const zipBlob = await zip.generateAsync({ type: 'blob' })
     saveAs(zipBlob, `${tourists[0].name} ${cityFrom}-${cityTo}.zip`)
 }
+
+async function getPdfPage(file) {
+    const doc = await PDFDocument.load(file)
+    doc.registerFontkit(fontkit)
+    const fonts = await loadFonts(doc)
+
+    const pages = doc.getPages()
+    const page = pages[0]
+
+    return {
+        doc,
+        fonts,
+        page
+    }
+}
+
+export function xyzCheck() {
+    const x = document.getElementById('x')
+    const y = document.getElementById('y')
+    const z = '0000'
+
+    if (y.value == z) {
+      y.blur()
+      x.classList.add('x-fall')
+    } else {
+      document.querySelector('#x > .tip').style.display = 'flex'
+    }
+  }

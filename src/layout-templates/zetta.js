@@ -22,6 +22,7 @@ export const zetta = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Серийный номер',
+        font: 'verdanaBold',
         content: () => "TRV-" + randomNumber("0000000000")
     },
     {
@@ -35,6 +36,7 @@ export const zetta = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Страхователь',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[0].name
     },
     {
@@ -48,6 +50,7 @@ export const zetta = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Дата выдачи',
+        font: 'verdanaBold',
         content: () => standartDate(today())
     },
     {
@@ -61,6 +64,7 @@ export const zetta = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Период с',
+        font: 'verdanaBold',
         content: (ctx) => standartDate(ctx.dateFrom.value)
     },
     {
@@ -74,6 +78,7 @@ export const zetta = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Период до',
+        font: 'verdanaBold',
         content: (ctx) => standartDate(ctx.dateTo.value)
     },
     {
@@ -87,6 +92,7 @@ export const zetta = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Кол-во дней',
+        font: 'verdanaBold',
         content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
     },
     {
@@ -100,6 +106,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№1 имя',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[0].name
     },
     {
@@ -113,6 +120,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№1 дата',
+        font: 'verdanaBold',
         content: (ctx) => standartDate(ctx.touristList[0].date)
     },
     {
@@ -126,6 +134,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№1 паспорт',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[0].passport
     },
     {
@@ -139,6 +148,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№2 имя',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[1] != undefined ? ctx.touristList[1].name : ""
     },
     {
@@ -152,6 +162,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№2 дата',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[1] != undefined ? standartDate(ctx.touristList[1].date) : ""
     },
     {
@@ -165,6 +176,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№2 паспорт',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[1] != undefined ? ctx.touristList[1].passport : ""
     },
     {
@@ -178,6 +190,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№3 имя',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[2] != undefined ? ctx.touristList[2].name : ""
     },
     {
@@ -191,6 +204,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№3 дата',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[2] != undefined ? standartDate(ctx.touristList[2].date) : ""
     },
     {
@@ -204,6 +218,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№3 паспорт',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[2] != undefined ? ctx.touristList[2].passport : ""
     },
     {
@@ -217,6 +232,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№4 имя',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[3] != undefined ? ctx.touristList[3].name : ""
     },
     {
@@ -230,6 +246,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№4 дата',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[3] != undefined ? standartDate(ctx.touristList[3].date) : ""
     },
     {
@@ -243,6 +260,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№4 паспорт',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[3] != undefined ? ctx.touristList[3].passport : ""
     },
     {
@@ -256,6 +274,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№5 имя',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].name : ""
     },
     {
@@ -269,6 +288,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№5 дата',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[4] != undefined ? standartDate(ctx.touristList[4].date) : ""
     },
     {
@@ -282,6 +302,7 @@ export const zetta = [
         size: 6.5,
         textColor: rgb(0, 0, 0),
         description: '№5 паспорт',
+        font: 'verdanaBold',
         content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].passport : ""
     },
 ]

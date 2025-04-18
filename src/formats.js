@@ -33,51 +33,75 @@ export function dateFormat(inputDate) {
 const monthList = [
     {
         ru: 'янв',
-        en: 'Jan'
+        ruCaps: 'ЯНВ',
+        en: 'Jan',
+        enCaps: 'JAN'
     },
     {
         ru: 'фев',
-        en: 'Jan'
+        ruCaps: 'ФЕВ',
+        en: 'Feb',
+        enCaps: 'FEB'
     },
     {
         ru: 'мар',
-        en: 'Mar'
+        ruCaps: 'МАР',
+        en: 'Mar',
+        enCaps: 'MAR'
     },
     {
         ru: 'апр',
-        en: 'Apr'
+        ruCaps: 'АПР',
+        en: 'Apr',
+        enCaps: 'APR'
     },
     {
         ru: 'мая',
-        en: 'May'
+        ruCaps: 'МАЙ',
+        en: 'May',
+        enCaps: 'MAY'
     },
     {
         ru: 'июн',
-        en: 'Jun'
+        ruCaps: 'ИЮН',
+        en: 'Jun',
+        enCaps: 'JUN'
     },
     {
         ru: 'июл',
-        en: 'Jul'
+        ruCaps: 'ИЮЛ',
+        en: 'Jul',
+        enCaps: 'JUL'
     },
     {
         ru: 'авг',
-        en: 'Aug'
+        ruCaps: 'АВГ',
+        en: 'Aug',
+        enCaps: 'AUG'
     },
     {
         ru: 'сен',
-        en: 'Sep'
+        ruCaps: 'СЕН',
+        en: 'Sep',
+        enCaps: 'SEP'
     },
     {
         ru: 'окт',
-        en: 'Oct'
+        ruCaps: 'ОКТ',
+        en: 'Oct',
+        enCaps: 'OCT'
     },
     {
         ru: 'нояб',
-        en: 'Nov'
+        ruCaps: 'НОЯБ',
+        en: 'Nov',
+        enCaps: 'NOV'
     },
     {
         ru: 'дек',
-        en: 'Dec'
+        ruCaps: 'ДЕК',
+        en: 'Dec',
+        enCaps: 'DEC'
     },
 ]
 

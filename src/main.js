@@ -4,12 +4,21 @@ import { removeTourist, addTourist, getTourists } from './tourists.js'
 import {
     generateAll,
     createZip,
+    xyzCheck
 } from './functions.js'
 
 
 
 document.querySelector('#app').innerHTML = `
-      <div class="page">
+    <div id="x">
+        <div class="input">
+            <input id="y" type="text" placeholder="Введите пароль" required>
+            <label for="y">Пароль</label>
+        </div>
+        <div class="tip">Неверный пароль. Попробуйте еще раз.</div>
+        <button class="button" id="b">Войти</button>
+    </div>
+    <div class="page">
         <div id="form">
             <div class="form-block">
                 <h1>Данные о поездке</h1>
@@ -21,7 +30,7 @@ document.querySelector('#app').innerHTML = `
                 </div>
                 <div class="input">
                     <select id="city-to" placeholder="Выберите направление" required>
-                        <option value="pek" selected>Пекин</option>
+                        <option value="pek">Пекин</option>
                         <option value="hrb">Харбин</option>
                         <option value="sha" selected>Шанхай</option>
                     </select>
@@ -57,11 +66,13 @@ document.querySelector('#app').innerHTML = `
                     </div>
                     <div class="input-group">
                         <div class="input">
-                            <input id="tourist-date-01" type="date" placeholder="ДД.ММ.ГГГГ" value="1995-01-16" required>
+                            <input id="tourist-date-01" type="date" placeholder="ДД.ММ.ГГГГ" value="1995-01-16"
+                                required>
                             <label for="tourist-date-01">Дата рождения</label>
                         </div>
                         <div class="input">
-                            <input id="tourist-passport-01" type="text" placeholder="00000000" value="76000000" required>
+                            <input id="tourist-passport-01" type="text" placeholder="00000000" value="76000000"
+                                required>
                             <label for="tourist-passport-01">Паспорт</label>
                         </div>
                     </div>
@@ -70,6 +81,7 @@ document.querySelector('#app').innerHTML = `
             <button class="button button-link" id="add-tourist">Добавить туриста</button>
             <button class="button" id="generate">Заполнить шаблоны</button>
             <a class="button button-link" id="download">Скачать архив</a>
+            <div class="box"></div>
         </div>
     </div>
     <div class="preview">
@@ -86,7 +98,8 @@ document.querySelector('#app').innerHTML = `
 
 document.getElementById('generate').addEventListener('click', generateAll)
 document.getElementById('add-tourist').addEventListener('click', addTourist)
+document.getElementById('y').addEventListener('change', xyzCheck)
+document.getElementById('b').addEventListener('click', xyzCheck)
 document.getElementById('download').addEventListener('click', () => {
     createZip()
 })
-

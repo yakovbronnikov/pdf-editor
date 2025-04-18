@@ -23,6 +23,7 @@ export const vvohrb = [
         size: 16,
         textColor: rgb(0, 0, 0),
         description: 'Номер брони',
+        font: 'robotoRegular',
         content: () => randomNumber("0A0A0A")
     },
     {
@@ -31,11 +32,12 @@ export const vvohrb = [
         x: 18,
         y: 699,
         bgColor: rgb(1, 1, 1),
-        textX: 20, 
+        textX: 18, 
         textY: 701.5,
         size: 14,
         textColor: rgb(0, 0, 0),
         description: 'Имя туристa',
+        font: 'robotoBold',
         content: (ctx) => ctx.tourist.name
     },
     {
@@ -49,6 +51,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0, 0, 0),
         description: 'Паспорт',
+        font: 'robotoRegular',
         content: (ctx) => ctx.tourist.passport
     },
     {
@@ -62,6 +65,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0, 0, 0),
         description: 'Номер заказа',
+        font: 'robotoRegular',
         content: () => randomNumber("000") + " " + randomNumber("0000000000")
     },
     {
@@ -75,6 +79,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0, 0, 0),
         description: 'Дата покупки',
+        font: 'robotoRegular',
         content: () => monthNameDate(today(), "en")
     },
     {
@@ -88,6 +93,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0.35, 0.35, 0.35),
         description: 'Дата вылета',
+        font: 'robotoRegular',
         content: (ctx) => monthNameDate(ctx.dateFrom.value, "en")
     },
     {
@@ -101,6 +107,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0.35, 0.35, 0.35),
         description: 'Дата посадки',
+        font: 'robotoRegular',
         content: (ctx) => monthNameDate(ctx.dateFrom.value, "en")
     },
     {
@@ -114,6 +121,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0.35, 0.35, 0.35),
         description: 'Дата вылета',
+        font: 'robotoRegular',
         content: (ctx) => monthNameDate(ctx.dateTo.value, "en")
     },
     {
@@ -127,6 +135,7 @@ export const vvohrb = [
         size: 9,
         textColor: rgb(0.35, 0.35, 0.35),
         description: 'Дата посадки',
+        font: 'robotoRegular',
         content: (ctx) => monthNameDate(ctx.dateTo.value, "en")
     },
 ]

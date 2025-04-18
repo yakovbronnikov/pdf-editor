@@ -22,6 +22,7 @@ export const vvopek = [
         size: 14,
         textColor: rgb(0, 0, 0),
         description: 'Номер заказа',
+        font: 'golosText',
         content: () => "№ " + randomNumber("0000000000")
     },
     {
@@ -35,6 +36,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Номер заказа',
+        font: 'golosText',
         content: (ctx) => ctx.tourist.name
     },
     {
@@ -48,6 +50,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Дата рождения',
+        font: 'golosText',
         content: (ctx) => monthNameDate(ctx.tourist.date, "ru")
     },
     {
@@ -61,6 +64,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Паспорт',
+        font: 'golosText',
         content: (ctx) => ctx.tourist.passport
     },
     {
@@ -74,6 +78,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Номер брони 1',
+        font: 'golosText',
         content: () => randomNumber("AA0A0A")
     },
     {
@@ -87,6 +92,7 @@ export const vvopek = [
         size: 7.3,
         textColor: rgb(0, 0, 0),
         description: 'Дата вылета',
+        font: 'golosText',
         content: (ctx) => monthNameDate(ctx.dateFrom.value, "ru")
     },
     {
@@ -100,6 +106,7 @@ export const vvopek = [
         size: 7.3,
         textColor: rgb(0, 0, 0),
         description: 'Дата посадки',
+        font: 'golosText',
         content: (ctx) => monthNameDate(ctx.dateFrom.value, "ru")
     },
     {
@@ -113,6 +120,7 @@ export const vvopek = [
         size: 10,
         textColor: rgb(0, 0, 0),
         description: 'Номер брони 2',
+        font: 'golosText',
         content: () => randomNumber("AA0A0A")
     },
     {
@@ -126,6 +134,7 @@ export const vvopek = [
         size: 7.3,
         textColor: rgb(0, 0, 0),
         description: 'Дата вылета',
+        font: 'golosText',
         content: (ctx) => monthNameDate(ctx.dateTo.value, "ru")
     },
     {
@@ -139,6 +148,7 @@ export const vvopek = [
         size: 7.3,
         textColor: rgb(0, 0, 0),
         description: 'Дата посадки',
+        font: 'golosText',
         content: (ctx) => monthNameDate(ctx.dateTo.value, "ru")
     },
     {
@@ -152,6 +162,7 @@ export const vvopek = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Дата покупки',
+        font: 'golosText',
         content: () => monthNameDate(today(), "ru")
     },
     {
@@ -164,7 +175,8 @@ export const vvopek = [
         textY: 227.5,
         size: 7.5,
         textColor: rgb(0.2, 0.2, 0.2),
-        description: 'Дата покупки',
+        description: 'Карта',
+        font: 'golosTextMedium',
         content: () => "*" + randomNumber("0000")
     },
 ]

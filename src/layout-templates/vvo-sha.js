@@ -21,6 +21,7 @@ export const vvosha = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Имя туриста',
+        font: 'golosText',
         content: (ctx) => ctx.tourist.name
     },
     {
@@ -34,6 +35,7 @@ export const vvosha = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Паспорт',
+        font: 'golosText',
         content: (ctx) => ctx.tourist.passport
     },
     {
@@ -47,6 +49,7 @@ export const vvosha = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Номер билета',
+        font: 'golosText',
         content: () => randomNumber("0000000000000")
     },
     {
@@ -60,6 +63,7 @@ export const vvosha = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'S7 priority',
+        font: 'golosText',
         content: () => "S7" + randomNumber("000000000")
     },
     {
@@ -71,8 +75,9 @@ export const vvosha = [
         textX: 439.5, 
         textY: 693.5,
         size: 16,
-        textColor: rgb(0.93, 0.64, 0),
+        textColor: rgb(0.93, 0.66, 0),
         description: 'Номер заказа',
+        font: 'golosTextMedium',
         content: () => randomNumber("AA0A0A0")
     },
     {
@@ -84,8 +89,9 @@ export const vvosha = [
         textX: 439.5, 
         textY: 646.5,
         size: 16,
-        textColor: rgb(0.93, 0.64, 0),
+        textColor: rgb(0.93, 0.66, 0),
         description: 'Номер бронирования',
+        font: 'golosTextMedium',
         content: () => randomNumber("A0AAAA")
     },
     {
@@ -97,8 +103,9 @@ export const vvosha = [
         textX: 439.5, 
         textY: 599.5,
         size: 16,
-        textColor: rgb(0.93, 0.64, 0),
+        textColor: rgb(0.93, 0.66, 0),
         description: 'Дата оформления',
+        font: 'golosTextMedium',
         content: () => monthNameDate(today(), "ru")
     },
     {
@@ -110,8 +117,9 @@ export const vvosha = [
         textX: 439.5, 
         textY: 552.5,
         size: 16,
-        textColor: rgb(0.93, 0.64, 0),
+        textColor: rgb(0.93, 0.66, 0),
         description: 'Дата оформления',
+        font: 'golosTextMedium',
         content: "Подтверждено"
     },
     {
@@ -121,10 +129,11 @@ export const vvosha = [
         y: 463,
         bgColor: rgb(1, 1, 1),
         textX: 112, 
-        textY: 464.7,
+        textY: 465.5,
         size: 11,
         textColor: rgb(0.96, 0.66, 0),
         description: 'Дата вылета',
+        font: 'golosText',
         content: (ctx) => monthNameDateOnly(ctx.dateFrom.value, "ru")
     },
     {
@@ -134,10 +143,11 @@ export const vvosha = [
         y: 463,
         bgColor: rgb(1, 1, 1),
         textX: 191, 
-        textY: 464.7,
+        textY: 465.5,
         size: 11,
         textColor: rgb(0.96, 0.66, 0),
         description: 'Дата посадки',
+        font: 'golosText',
         content: (ctx) => monthNameDateOnly(ctx.dateFrom.value, "ru")
     },
     {
@@ -147,10 +157,11 @@ export const vvosha = [
         y: 407,
         bgColor: rgb(1, 1, 1),
         textX: 112, 
-        textY: 408.7,
+        textY: 409.5,
         size: 11,
         textColor: rgb(0.96, 0.66, 0),
         description: 'Дата вылета',
+        font: 'golosText',
         content: (ctx) => monthNameDateOnly(ctx.dateTo.value, "ru")
     },
     {
@@ -160,10 +171,11 @@ export const vvosha = [
         y: 407,
         bgColor: rgb(1, 1, 1),
         textX: 191, 
-        textY: 408.7,
+        textY: 409.5,
         size: 11,
-        textColor: rgb(0.93, 0.67, 0),
+        textColor: rgb(0.96, 0.66, 0),
         description: 'Дата посадки',
+        font: 'golosText',
         content: (ctx) => monthNameDateOnly(ctx.dateTo.value, "ru")
     },
 ]

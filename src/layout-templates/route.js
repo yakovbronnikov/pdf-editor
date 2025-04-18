@@ -157,7 +157,7 @@ export const route = [
     },
     {
         textX: 305, 
-        textY: 433,
+        textY: 432,
         size: 11,
         textColor: rgb(0, 0, 0),
         description: 'Дата с',
@@ -165,7 +165,7 @@ export const route = [
     },
     {
         textX: 305, 
-        textY: 373,
+        textY: 376,
         size: 11,
         textColor: rgb(0, 0, 0),
         description: 'Дата с',
@@ -173,7 +173,7 @@ export const route = [
     },
     {
         textX: 305, 
-        textY: 311,
+        textY: 319,
         size: 11,
         textColor: rgb(0, 0, 0),
         description: 'Дата с',

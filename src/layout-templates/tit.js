@@ -22,6 +22,7 @@ export const tit = [
         size: 8.5,
         textColor: rgb(0, 0, 0),
         description: 'Номер полиса',
+        font: 'notoSerif',
         content: () => "№ UBK_DG_VZR25-01/25/02/" + randomNumber("000000")
     },
     {
@@ -35,6 +36,7 @@ export const tit = [
         size: 7,
         textColor: rgb(0, 0, 0),
         description: 'Дата выдачи',
+        font: 'notoSerif',
         content: () => standartDate(today())
     },
     {
@@ -48,6 +50,7 @@ export const tit = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Cтрахователь',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[0].name + ", " + standartDate(ctx.touristList[0].date)
     },
     {
@@ -61,6 +64,7 @@ export const tit = [
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Паспорт срахователя',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[0].passport
     },
     {
@@ -74,6 +78,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№1 Имя',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[0].name
     },
     {
@@ -87,6 +92,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№1 дата',
+        font: 'notoSerif',
         content: (ctx) => standartDate(ctx.touristList[0].date)
     },
     {
@@ -100,6 +106,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№1 паспорт',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[0].passport
     },
     {
@@ -113,6 +120,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№2 Имя',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[1] != undefined ? ctx.touristList[1].name : ""
     },
     {
@@ -126,6 +134,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№2 дата',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[1] != undefined ? standartDate(ctx.touristList[1].date) : ""
     },
     {
@@ -139,6 +148,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№2 паспорт',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[1] != undefined ? ctx.touristList[1].passport : ""
     },
     {
@@ -152,6 +162,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№3 Имя',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[2] != undefined ? ctx.touristList[2].name : ""
     },
     {
@@ -165,6 +176,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№3 дата',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[2] != undefined ? standartDate(ctx.touristList[2].date) : ""
     },
     {
@@ -178,6 +190,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№3 паспорт',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[2] != undefined ? ctx.touristList[2].passport : ""
     },
     {
@@ -191,6 +204,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№4 Имя',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[3] != undefined ? ctx.touristList[3].name : ""
     },
     {
@@ -204,6 +218,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№4 дата',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[3] != undefined ? standartDate(ctx.touristList[3].date) : ""
     },
     {
@@ -217,6 +232,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№4 паспорт',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[3] != undefined ? ctx.touristList[3].passport : ""
     },
     {
@@ -230,6 +246,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№5 Имя',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].name : ""
     },
     {
@@ -243,6 +260,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№5 дата',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[4] != undefined ? standartDate(ctx.touristList[4].date) : ""
     },
     {
@@ -256,6 +274,7 @@ export const tit = [
         size: 6.8,
         textColor: rgb(0, 0, 0),
         description: '№5 паспорт',
+        font: 'notoSerif',
         content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].passport : ""
     },
     {
@@ -269,6 +288,7 @@ export const tit = [
         size: 7,
         textColor: rgb(0, 0, 0),
         description: 'Срок страхования',
+        font: 'notoSerif',
         content: (ctx) => standartDate(ctx.dateFrom.value) + " - " + standartDate(ctx.dateFrom.value)
     },
 ]

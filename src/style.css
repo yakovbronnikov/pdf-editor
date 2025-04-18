@@ -57,18 +57,6 @@ h3 {
   margin-top: 24px;
 }
 
-.tip {
-  width: 100%;
-  padding: 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-  background: var(--info-5);
-  border: 1px solid var(--info-20);
-  margin-top: -24px;
-}
-
 /* INPUT AND SELECT */
 
 .input {
@@ -200,8 +188,10 @@ input[type='date']:valid {
   box-shadow: 0 12px 24px rgba(0,0,0,0.1);
 }
 
-.page_wrapper > .button-link {
-  margin-top: -56px;
+.box {
+  min-height: 1px;
+  background: var(--white);
+  width: 24px;
 }
 
 #form {
@@ -273,6 +263,66 @@ input[type='date']:valid {
   border: 1px solid var(--bg-field-hover);
 }
 
+#x {
+  position: absolute;
+  z-index: 200;
+  top: 0; bottom: 0; 
+  left: 0; right: 0;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.tip {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  background: var(--error-5);
+  border: 1px solid var(--error-20);
+  display: none;
+  justify-content: center;
+}
+
+#x .input,
+#x .button,
+#x .tip {
+  max-width: 340px;
+}
+
+.x-fall {
+  animation: x-fall 2s forwards;
+}
+
+.x-fall .input,
+.x-fall .button,
+.x-fall .tip {
+  animation: x-intro 2s forwards;
+  pointer-events: none;
+}
+
+
+@keyframes x-fall {
+  0% {opacity: 1;}
+  90% {opacity: 1;}
+  99.9% {opacity: 0;}
+  100% {opacity: 0; display: none;}
+}
+
+@keyframes x-intro {
+  0% {opacity: 0.3;}
+  25% {opacity: 0.1;}
+  50% {opacity: 0.3;}
+  75% {opacity: 0.1;}
+  100% {opacity: 0.3;}
+}
+
+
 
 /* BREAKPOINTS */
 
@@ -309,6 +359,10 @@ input[type='date']:valid {
   .page {
     padding: 24px;
     padding-bottom: 80px;
+  }
+
+  .box {
+    display: none;
   }
 
   .preview {

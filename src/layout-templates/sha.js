@@ -21,6 +21,7 @@ export const sha = [
         size: 9,
         textColor: rgb(0, 0.61, 1),
         description: 'Код подтверждения',
+        font: 'robotoBold',
         content: () => randomNumber("0000") + "." + randomNumber("000") + "." + randomNumber("000")
     },
     {
@@ -34,6 +35,7 @@ export const sha = [
         size: 9,
         textColor: rgb(0, 0.61, 1),
         description: 'ПИН-код',
+        font: 'robotoBold',
         content: () => randomNumber("0000")
     },
     {
@@ -42,11 +44,12 @@ export const sha = [
         x: 343,
         y: 744,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 345, 
+        textX: 348, 
         textY: 746,
         size: 18.5,
         textColor: rgb(0, 0, 0),
         description: 'Заезд - день',
+        font: 'robotoBold',
         content: (ctx) => dateFormat(ctx.dateFrom.value).day
     },
     {
@@ -60,7 +63,8 @@ export const sha = [
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Заезд - месяц',
-        content: (ctx) => dateFormat(ctx.dateFrom.value).monthName.ru
+        font: 'robotoBold',
+        content: (ctx) => dateFormat(ctx.dateFrom.value).monthName.enCaps
     },
     {
         width: 35,
@@ -71,9 +75,10 @@ export const sha = [
         textX: 345, 
         textY: 723.5,
         size: 7,
-        textColor: rgb(0.5, 0.5, 0.5),
+        textColor: rgb(0, 0, 0),
         description: 'Заезд - день недели',
-        content: (ctx) => dateFormat(ctx.dateFrom.value).weekday.ru
+        font: 'Brygada1918',
+        content: (ctx) => dateFormat(ctx.dateFrom.value).weekday.en
     },
     {
         width: 35,
@@ -81,11 +86,12 @@ export const sha = [
         x: 425,
         y: 744,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 426, 
+        textX: 431, 
         textY: 746,
         size: 18.5,
         textColor: rgb(0, 0, 0),
         description: 'Выезд - день',
+        font: 'robotoBold',
         content: (ctx) => dateFormat(ctx.dateTo.value).day
     },
     {
@@ -94,12 +100,13 @@ export const sha = [
         x: 430,
         y: 733,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 431, 
+        textX: 434.5, 
         textY: 734,
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Выезд - месяц',
-        content: (ctx) => dateFormat(ctx.dateTo.value).monthName.ru
+        font: 'robotoBold',
+        content: (ctx) => dateFormat(ctx.dateTo.value).monthName.enCaps
     },
     {
         width: 35,
@@ -107,12 +114,27 @@ export const sha = [
         x: 424,
         y: 721.5,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 426, 
+        textX: 430, 
         textY: 723.5,
         size: 7,
-        textColor: rgb(0.5, 0.5, 0.5),
+        textColor: rgb(0, 0, 0),
         description: 'Выезд - день недели',
-        content: (ctx) => dateFormat(ctx.dateTo.value).weekday.ru
+        font: 'Brygada1918',
+        content: (ctx) => dateFormat(ctx.dateTo.value).weekday.en
+    },
+    {
+        width: 15,
+        height: 20,
+        x: 500,
+        y: 744,
+        bgColor: rgb(0.95, 0.95, 0.95),
+        textX: 499, 
+        textY: 746,
+        size: 18.5,
+        textColor: rgb(0, 0, 0),
+        description: 'Комнат',
+        font: 'robotoBold',
+        content: () => '1'
     },
     {
         width: 30,
@@ -125,6 +147,7 @@ export const sha = [
         size: 18.5,
         textColor: rgb(0, 0, 0),
         description: 'Кол-во ночей',
+        font: 'robotoBold',
         content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
     },
     {
