@@ -28,14 +28,14 @@ export const vvopek = [
     {
         width: 290,
         height: 17,
-        x: 37,
+        x: 36,
         y: 705,
         bgColor: rgb(1, 1, 1),
         textX: 37, 
         textY: 709,
         size: 10,
         textColor: rgb(0, 0, 0),
-        description: 'Номер заказа',
+        description: 'Имя туриста',
         font: 'golosText',
         content: (ctx) => ctx.tourist.name
     },
