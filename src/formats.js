@@ -170,3 +170,15 @@ export function monthNameDate(date, lang) {
 export function monthNameDateOnly(date, lang) {
     return dateFormat(date).day + " " + dateFormat(date).monthName[lang]
 }
+
+export function getTime(timeZone) {
+    const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZone,
+    };
+
+    const formatter = new Intl.DateTimeFormat('en-GB', options);
+    return formatter.format(new Date());
+}

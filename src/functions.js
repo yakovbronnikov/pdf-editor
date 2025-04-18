@@ -46,6 +46,8 @@ const templates = [
 ]
 
 export async function generateAll() {
+    document.querySelector('.loader').classList.add('loader-active')
+
     const insSelect = document.getElementById('template-insurance').value
     const cityFrom = document.getElementById('city-from').value
     const cityTo = document.getElementById('city-to').value
@@ -76,6 +78,8 @@ export async function generateAll() {
     generateTickets()
     generateBooking()
 
+    document.querySelector('.loader').classList.remove('loader-active')
+
     return modifiedPDFs
 }
 
@@ -89,7 +93,9 @@ function drawLayout(page, layout, font, tourist) {
         dateFrom: document.getElementById('date-from'),
         dateTo: document.getElementById('date-to'),
         touristList: getTourists(),
-        tourist: tourist
+        tourist: tourist,
+        font: font,
+        text: ''
     }
 
     for (let i = 0; i < layout.length; i++) {
@@ -101,12 +107,13 @@ function drawLayout(page, layout, font, tourist) {
             color: layout[i].bgColor
         })
 
-        const rawContent = layout[i].content
-        const value = typeof rawContent === 'function' ? rawContent(context) : rawContent
-        const displayText = value !== undefined && value !== null ? value : '';
+        const content = funcOrNot(layout[i].content, context)
+        const displayText = content !== undefined && content !== null ? content : '';
+        context.text = String(displayText)
+        const textX = funcOrNot(layout[i].textX, context) 
 
         page.drawText(String(displayText), {
-            x: layout[i].textX,
+            x: textX,
             y: layout[i].textY,
             size: layout[i].size,
             color: layout[i].textColor,
@@ -114,6 +121,8 @@ function drawLayout(page, layout, font, tourist) {
         })
     }
 }
+
+
 
 
 // ГЕНЕРАЦИЯ БИЛЕТОВ
@@ -149,29 +158,29 @@ async function generateBooking() {
     const booking = await fetch(`pdf-templates/booking-${cityTo}.pdf`).then(res => res.arrayBuffer())
     const bookingLayout = await import(`../src/layout-templates/${cityTo}.js`)
     const bookingPDFs = []
-    const touristList = getTourists()
+    const touristList = chunkTourists(getTourists(), 2)
 
-    if (touristList.length <= 2) {
+    if (touristList.length == 1) {
 
         const pdf = await getPdfPage(booking)
-        drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts)
+        drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts, touristList[0])
         const pdfBytes = await pdf.doc.save()
         bookingPDFs.push(pdfBytes)
 
-    } else if (touristList.length <= 4) {
-        for (let i = 0; i < 2; i++) {
+    } else if (touristList.length == 2) {
+        for (let i = 0; i < touristList.length; i++) {
 
             const pdf = await getPdfPage(booking)
-            drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts)
+            drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts, touristList[i])
             const pdfBytes = await pdf.doc.save()
             bookingPDFs.push(pdfBytes)
 
         }
     } else {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < touristList.length; i++) {
 
             const pdf = await getPdfPage(booking)
-            drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts)
+            drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts, touristList[i])
             const pdfBytes = await pdf.doc.save()
             bookingPDFs.push(pdfBytes)
 
@@ -202,6 +211,8 @@ export async function createZip() {
         cityTo = document.getElementById('city-to').value,
         tourists = getTourists()
 
+    document.querySelector('.loader').classList.add('loader-active')
+
     pdfBuffers.forEach((pdfBytes, index) => {
         zip.file(`${templates[index].name}.pdf`, pdfBytes)
     })
@@ -214,8 +225,11 @@ export async function createZip() {
         bookingFolder.file(`Отель-${index + 1}.pdf`, pdfBytes)
     })
 
+    
+
     const zipBlob = await zip.generateAsync({ type: 'blob' })
     saveAs(zipBlob, `${tourists[0].name} ${cityFrom}-${cityTo}.zip`)
+    document.querySelector('.loader').classList.remove('loader-active')
 }
 
 async function getPdfPage(file) {
@@ -237,11 +251,38 @@ export function xyzCheck() {
     const x = document.getElementById('x')
     const y = document.getElementById('y')
     const z = '0000'
+    const checkbox = document.getElementById('checkbox').checked
 
     if (y.value == z) {
-      y.blur()
-      x.classList.add('x-fall')
+        y.blur()
+        x.classList.add('x-fall')
     } else {
-      document.querySelector('#x > .tip').style.display = 'flex'
+        document.querySelector('#x > .tip').style.display = 'flex'
     }
-  }
+
+    if (checkbox) {
+        localStorage.setItem('remember', JSON.stringify({ remember: true }))
+    } else {
+        localStorage.setItem('remember', JSON.stringify({ remember: false }))
+    }
+}
+
+function chunkTourists(arr, size) {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += size) {
+        chunks.push(arr.slice(i, i + size))
+    }
+    return chunks
+}
+
+
+export function centeredText(text, center, font, fontSize) {
+    const width = font.widthOfTextAtSize(text, fontSize)
+    const x = center - width / 2
+    return x
+}
+
+function funcOrNot(raw, ctx) {
+    const value = typeof raw === 'function' ? raw(ctx) : raw
+    return value
+}

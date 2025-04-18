@@ -6,7 +6,8 @@ import {
     standartDate,
     monthNameDate,
     today,
-    monthNameDateOnly
+    monthNameDateOnly,
+    getTime
 } from '../formats.js'
 
 
@@ -329,8 +330,8 @@ export const euroins = [
         textY: 634,
         size: 7.2,
         textColor: rgb(0, 0, 0),
-        description: 'Страхователь',
+        description: 'Дата выдачи',
         font: 'verdanaBold',
-        content: () => standartDate(today(), "en")
+        content: () => standartDate(today(), "en") + ' ' + getTime('Europe/Moscow') + ' (МСК)'
     },
 ]

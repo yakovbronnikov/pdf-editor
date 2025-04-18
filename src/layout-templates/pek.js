@@ -5,6 +5,8 @@ import {
     dayCount,
 } from '../formats.js'
 
+import { centeredText } from '../functions.js'
+
 
 export const pek = [
     {
@@ -69,7 +71,7 @@ export const pek = [
         x: 344,
         y: 721.5,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 345, 
+        textX: (ctx) => centeredText(ctx.text, 357, ctx.font['Brygada1918'], 7),
         textY: 723.5,
         size: 7,
         textColor: rgb(0, 0, 0),
@@ -111,7 +113,7 @@ export const pek = [
         x: 425,
         y: 721.5,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 430, 
+        textX: (ctx) => centeredText(ctx.text, 442, ctx.font['Brygada1918'], 7),
         textY: 723.5,
         size: 7,
         textColor: rgb(0, 0, 0),
@@ -156,11 +158,17 @@ export const pek = [
         description: 'Стоимость отмены'
     },
     {
-        width: 300,
+        width: 290,
         height: 10,
-        x: 40,
-        y: 390,
+        x: 90,
+        y: 388,
         bgColor: rgb(1, 1, 1),
-        description: 'Гости'
+        textX: 91, 
+        textY: 390.8,
+        size: 7.5,
+        textColor: rgb(0, 0, 0),
+        description: 'Гости',
+        font: 'robotoRegular',
+        content: (ctx) => ctx.tourist.length == 2 ? ctx.tourist[0].name + ', ' + ctx.tourist[1].name : ctx.tourist[0].name
     },
 ]

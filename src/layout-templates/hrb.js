@@ -5,6 +5,8 @@ import {
     dayCount,
 } from '../formats.js'
 
+import { centeredText } from '../functions.js'
+
 
 export const hrb = [
     {
@@ -69,7 +71,7 @@ export const hrb = [
         x: 320,
         y: 721.5,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 345, 
+        textX: (ctx) => centeredText(ctx.text, 359, ctx.font['Brygada1918'], 7),
         textY: 723.5,
         size: 7,
         textColor: rgb(0, 0, 0),
@@ -111,7 +113,7 @@ export const hrb = [
         x: 400,
         y: 721.5,
         bgColor: rgb(0.95, 0.95, 0.95),
-        textX: 426, 
+        textX: (ctx) => centeredText(ctx.text, 440, ctx.font['Brygada1918'], 7),
         textY: 723.5,
         size: 7,
         textColor: rgb(0, 0, 0),
@@ -162,5 +164,33 @@ export const hrb = [
         y: 85,
         bgColor: rgb(1, 1, 1),
         description: 'Важная информация'
+    },
+    {
+        width: 290,
+        height: 14,
+        x: 117,
+        y: 386,
+        bgColor: rgb(1, 1, 1),
+        textX: 119, 
+        textY: 389,
+        size: 7.5,
+        textColor: rgb(0, 0, 0),
+        description: 'Гости',
+        font: 'robotoBold',
+        content: () => 'Гости:'
+    },
+    {
+        width: 290,
+        height: 10,
+        x: 142,
+        y: 386,
+        bgColor: rgb(1, 1, 1),
+        textX: 144, 
+        textY: 389,
+        size: 7.5,
+        textColor: rgb(0, 0, 0),
+        description: 'Гости',
+        font: 'robotoRegular',
+        content: (ctx) => ctx.tourist.length == 2 ? ctx.tourist[0].name + ', ' + ctx.tourist[1].name : ctx.tourist[0].name
     },
 ]

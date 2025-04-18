@@ -289,6 +289,20 @@ export const tit = [
         textColor: rgb(0, 0, 0),
         description: 'Срок страхования',
         font: 'notoSerif',
-        content: (ctx) => standartDate(ctx.dateFrom.value) + " - " + standartDate(ctx.dateFrom.value)
+        content: (ctx) => standartDate(ctx.dateFrom.value) + " - " + standartDate(ctx.dateTo.value)
+    },
+    {
+        width: 40,
+        height: 8,
+        x: 388,
+        y: 548,
+        bgColor: rgb(1, 1, 1),
+        textX: 390, 
+        textY: 549,
+        size: 7,
+        textColor: rgb(0, 0, 0),
+        description: 'Кол-во дней',
+        font: 'notoSerif',
+        content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
     },
 ]
