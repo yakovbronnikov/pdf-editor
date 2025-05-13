@@ -78,7 +78,7 @@ document.querySelector('#app').innerHTML = `
                     <select name="template" id="template-insurance" placeholder="Выберите шаблон" required>
                         <option value="euroins">ЕВРОИНС</option>
                         <option value="tit">TIT</option>
-                        <option value="zetta">Zetta</option>
+                        <option value="zetta" selected>Zetta</option>
                     </select>
                     <label for="template-insurance">Страховка</label>
                 </div>

@@ -305,4 +305,32 @@ export const zetta = [
         font: 'verdanaBold',
         content: (ctx) => ctx.touristList[4] != undefined ? ctx.touristList[4].passport : ""
     },
+    {
+        width: 155,
+        height: 9,
+        x: 29,
+        y: 453.5,
+        bgColor: rgb(1, 1, 1),
+        textX: 29, 
+        textY: 456,
+        size: 5.7,
+        textColor: rgb(0, 0, 0),
+        description: '№5 паспорт',
+        font: 'robotoRegular',
+        content: () => 'Общая премия уплачена в срок до ' + standartDate(today()) + ' в размере'
+    },
+    {
+        width: 155,
+        height: 9,
+        x: 29,
+        y: 444.5,
+        bgColor: rgb(1, 1, 1),
+        textX: 29, 
+        textY: 449,
+        size: 5.7,
+        textColor: rgb(0, 0, 0),
+        description: '№5 паспорт',
+        font: 'robotoRegular',
+        content: () => 'Total premium paid date of payment ' + standartDate(today())
+    },
 ]
