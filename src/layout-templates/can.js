@@ -12,16 +12,16 @@ import {
 import { centeredText } from '../functions.js'
 
 
-export const sha = [
+export const can = [
     {
         width: 70,
         height: 12,
-        x: 497,
+        x: 471,
         y: 796,
         bgColor: rgb(1, 1, 1),
-        textX: 497, 
-        textY: 799,
-        size: 9,
+        textX: 472.5, 
+        textY: 798.5,
+        size: 9.5,
         textColor: rgb(0, 0.61, 1),
         description: 'Код подтверждения',
         font: 'robotoBold',
@@ -30,12 +30,12 @@ export const sha = [
     {
         width: 60,
         height: 12,
-        x: 449,
+        x: 417,
         y: 784,
         bgColor: rgb(1, 1, 1),
-        textX: 450, 
+        textX: 418, 
         textY: 786.5,
-        size: 9,
+        size: 9.5,
         textColor: rgb(0, 0.61, 1),
         description: 'ПИН-код',
         font: 'robotoBold',
@@ -47,7 +47,7 @@ export const sha = [
         x: 343,
         y: 744,
         bgColor: rgb(0.949, 0.957, 0.965),
-        textX: 348, 
+        textX: (ctx) => centeredText(dateFormat(ctx.dateFrom.value).day, 359, ctx.font['robotoBold'], 18.5),
         textY: 746,
         size: 18.5,
         textColor: rgb(0, 0, 0),
@@ -56,23 +56,23 @@ export const sha = [
         content: (ctx) => dateFormat(ctx.dateFrom.value).day
     },
     {
-        width: 35,
+        width: 60,
         height: 9,
-        x: 349,
+        x: 330,
         y: 733,
         bgColor: rgb(0.949, 0.957, 0.965),
-        textX: 350, 
+        textX: (ctx) => centeredText(dateFormat(ctx.dateFrom.value).monthName.ruCaps, 359, ctx.font['robotoBold'], 8),
         textY: 734,
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Заезд - месяц',
         font: 'robotoBold',
-        content: (ctx) => dateFormat(ctx.dateFrom.value).monthName.enCaps
+        content: (ctx) => dateFormat(ctx.dateFrom.value).monthName.ruCaps
     },
     {
-        width: 35,
+        width: 45,
         height: 8,
-        x: 343,
+        x: 333,
         y: 721.5,
         bgColor: rgb(0.949, 0.957, 0.965),
         textX: (ctx) => centeredText(ctx.text, 358, ctx.font['Brygada1918'], 7),
@@ -81,7 +81,7 @@ export const sha = [
         textColor: rgb(0, 0, 0),
         description: 'Заезд - день недели',
         font: 'Brygada1918',
-        content: (ctx) => dateFormat(ctx.dateFrom.value).weekday.en
+        content: (ctx) => dateFormat(ctx.dateFrom.value).weekday.ru
     },
     {
         width: 35,
@@ -89,7 +89,7 @@ export const sha = [
         x: 425,
         y: 744,
         bgColor: rgb(0.949, 0.957, 0.965),
-        textX: 431, 
+        textX: (ctx) => centeredText(dateFormat(ctx.dateTo.value).day, 440, ctx.font['robotoBold'], 18.5),
         textY: 746,
         size: 18.5,
         textColor: rgb(0, 0, 0),
@@ -98,23 +98,24 @@ export const sha = [
         content: (ctx) => dateFormat(ctx.dateTo.value).day
     },
     {
-        width: 35,
+        width: 60,
         height: 9,
-        x: 430,
+        x: 410,
         y: 733,
         bgColor: rgb(0.949, 0.957, 0.965),
         textX: 434.5, 
+        textX: (ctx) => centeredText(dateFormat(ctx.dateTo.value).monthName.ruCaps, 440, ctx.font['robotoBold'], 8),
         textY: 734,
         size: 8,
         textColor: rgb(0, 0, 0),
         description: 'Выезд - месяц',
         font: 'robotoBold',
-        content: (ctx) => dateFormat(ctx.dateTo.value).monthName.enCaps
+        content: (ctx) => dateFormat(ctx.dateTo.value).monthName.ruCaps
     },
     {
-        width: 35,
+        width: 45,
         height: 8,
-        x: 424,
+        x: 414,
         y: 721.5,
         bgColor: rgb(0.949, 0.957, 0.965),
         textX: (ctx) => centeredText(ctx.text, 442, ctx.font['Brygada1918'], 7), 
@@ -123,7 +124,7 @@ export const sha = [
         textColor: rgb(0, 0, 0),
         description: 'Выезд - день недели',
         font: 'Brygada1918',
-        content: (ctx) => dateFormat(ctx.dateTo.value).weekday.en
+        content: (ctx) => dateFormat(ctx.dateTo.value).weekday.ru
     },
     {
         width: 15,
@@ -154,29 +155,21 @@ export const sha = [
         content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
     },
     {
-        width: 155,
-        height: 40,
-        x: 398,
-        y: 345,
+        width: 150,
+        height: 35,
+        x: 405,
+        y: 338,
         bgColor: rgb(1, 1, 1),
         description: 'Стоимость отмены'
     },
     {
-        width: 330,
-        height: 8,
-        x: 40,
-        y: 386,
-        bgColor: rgb(1, 1, 1),
-        description: 'Гости 2 строка'
-    },
-    {
         width: 298,
         height: 10,
-        x: 90,
+        x: 85,
         y: 393,
         bgColor: rgb(1, 1, 1),
-        textX: 91, 
-        textY: 396.7,
+        textX: 86, 
+        textY: 395.3,
         size: 7.5,
         textColor: rgb(0, 0, 0),
         description: 'Гости',

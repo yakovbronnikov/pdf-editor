@@ -303,6 +303,6 @@ export const tit = [
         textColor: rgb(0, 0, 0),
         description: 'Кол-во дней',
         font: 'notoSerif',
-        content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
+        content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value) + 1
     },
 ]

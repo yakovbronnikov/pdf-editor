@@ -39,6 +39,7 @@ const templates = [
             pek: route,
             sha: route,
             hrb: route,
+            can: route,
         },
         name: 'Турмаршрут',
         iframe: 'route-preview'
@@ -46,11 +47,12 @@ const templates = [
 ]
 
 export async function generateAll() {
-    document.querySelector('.loader').classList.add('loader-active')
 
     const insSelect = document.getElementById('template-insurance').value
     const cityFrom = document.getElementById('city-from').value
     const cityTo = document.getElementById('city-to').value
+
+    document.querySelector('.loader').classList.add('loader-active')
 
     const insurance = await fetch(`pdf-templates/${insSelect}.pdf`).then(res => res.arrayBuffer())
     const route = await fetch(`pdf-templates/route-${cityTo}.pdf`).then(res => res.arrayBuffer())
@@ -161,7 +163,6 @@ async function generateBooking() {
     const touristList = chunkTourists(getTourists(), 2)
 
     if (touristList.length == 1) {
-
         const pdf = await getPdfPage(booking)
         drawLayout(pdf.page, bookingLayout[`${cityTo}`], pdf.fonts, touristList[0])
         const pdfBytes = await pdf.doc.save()

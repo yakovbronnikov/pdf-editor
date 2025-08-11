@@ -14,9 +14,16 @@ export function randomNumber(template) {
 
 // DATE FORMAT
 
-export function dateFormat(inputDate) {
+export function dateFormat(inputDate, addDay) {
     const date = new Date(inputDate)
-    const [year, month, day] = inputDate.split('-')
+    
+    if (addDay > 0) {
+        date.setDate(date.getDate() + addDay)
+    }
+
+    const newDate = date.toISOString().split('T')[0];
+    const [year, month, day] = newDate.split('-')
+
     let weekday = date.getDay()
     let monthName = date.getMonth()
     let dateList = {
@@ -25,6 +32,10 @@ export function dateFormat(inputDate) {
         month: month,
         weekday: dayList[weekday],
         monthName: monthList[monthName]
+    }
+
+    if (addDay > 0) {
+        console.log(dateList.month)
     }
 
     return dateList
@@ -163,8 +174,8 @@ export function standartDate(date) {
     return dateFormat(date).day + "." + dateFormat(date).month + "." + dateFormat(date).year
 }
 
-export function monthNameDate(date, lang) {
-    return dateFormat(date).day + " " + dateFormat(date).monthName[lang] + " " + dateFormat(date).year
+export function monthNameDate(date, lang, addDay = 0) {
+    return dateFormat(date, addDay).day + " " + dateFormat(date, addDay).monthName[lang] + " " + dateFormat(date).year
 }
 
 export function monthNameDateOnly(date, lang) {

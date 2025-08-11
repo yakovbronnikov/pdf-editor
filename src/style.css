@@ -66,6 +66,15 @@ h3 {
   width: 100%;
 }
 
+.input div {
+  font-size: 12px;
+  line-height: 18px;
+  padding-left: 12px;
+  margin-top: 2px;
+  color: var(--error);
+  display: none;
+}
+
 .page_wrapper .input {
   width: 100%;
 }
@@ -143,6 +152,21 @@ input[type='date']:valid {
   width: 100%;
   display: flex;
   gap: 12px;
+}
+
+.input-error div {
+  display: block;
+}
+
+.input-error input,
+.input-error select {
+  background: var(--error-5);
+  border: 1px solid var(--error);
+}
+
+.input-error input:focus,
+.input-error select:focus {
+  outline: 3px solid var(--error-20);
 }
 
 /* BUTTON */

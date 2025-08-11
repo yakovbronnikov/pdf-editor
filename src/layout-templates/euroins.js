@@ -318,7 +318,7 @@ export const euroins = [
         textColor: rgb(0, 0, 0),
         description: 'Количество дней',
         font: 'verdanaBold',
-        content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
+        content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value) + 1
     },
     {
         width: 100,

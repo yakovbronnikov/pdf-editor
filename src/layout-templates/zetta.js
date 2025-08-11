@@ -93,7 +93,7 @@ export const zetta = [
         textColor: rgb(0, 0, 0),
         description: 'Кол-во дней',
         font: 'verdanaBold',
-        content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value)
+        content: (ctx) => dayCount(ctx.dateFrom.value, ctx.dateTo.value) + 1
     },
     {
         width: 140,
@@ -308,6 +308,20 @@ export const zetta = [
     {
         width: 155,
         height: 9,
+        x: 114,
+        y: 467,
+        bgColor: rgb(0.86, 0.86, 0.86),
+        textX: 116, 
+        textY: 468,
+        size: 8,
+        textColor: rgb(0, 0, 0),
+        description: 'Covered',
+        font: 'verdanaBold',
+        content: (ctx) => 'COVERED ONLY ' + (dayCount(ctx.dateFrom.value, ctx.dateTo.value) + 1) + ' DAYS'
+    },
+    {
+        width: 155,
+        height: 9,
         x: 29,
         y: 453.5,
         bgColor: rgb(1, 1, 1),
@@ -315,7 +329,7 @@ export const zetta = [
         textY: 456,
         size: 5.7,
         textColor: rgb(0, 0, 0),
-        description: '№5 паспорт',
+        description: 'Премия',
         font: 'robotoRegular',
         content: () => 'Общая премия уплачена в срок до ' + standartDate(today()) + ' в размере'
     },
@@ -329,7 +343,7 @@ export const zetta = [
         textY: 449,
         size: 5.7,
         textColor: rgb(0, 0, 0),
-        description: '№5 паспорт',
+        description: 'Премия EN',
         font: 'robotoRegular',
         content: () => 'Total premium paid date of payment ' + standartDate(today())
     },
