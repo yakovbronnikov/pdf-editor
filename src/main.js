@@ -53,18 +53,18 @@ document.querySelector('#app').innerHTML = `
                 <h1>Данные о поездке</h1>
                 <div class="input">
                     <select id="city-from" placeholder="Выберите направление" required>
-                        <option value="vvo">Владивосток</option>
-                        <option value="msk" selected>Москва</option>
+                        <option value="vvo" selected>Владивосток</option>
+                        <option value="msk">Москва</option>
                     </select>
                     <label for="city-from">Откуда</label>
                     <div>Выберите город отправления</div>
                 </div>
                 <div class="input">
                     <select id="city-to" placeholder="Выберите направление" required>
-                        <option value="pek">Пекин</option>
+                        <option value="pek" selected>Пекин</option>
                         <option value="hrb">Харбин</option>
                         <option value="sha">Шанхай</option>
-                        <option value="can" selected>Гуанчжоу</option>
+                        <option value="can">Гуанчжоу</option>
                     </select>
                     <label for="city-to">Куда</label>
                     <div>Выберите город прибытия</div>
@@ -133,8 +133,6 @@ const from = document.getElementById('city-from')
 const to = document.getElementById('city-to')
 from.addEventListener('change', selectFrom)
 to.addEventListener('change', selectTo)
-
-console.log(typeof document.getElementById('date-from').value)
 
 document.getElementById('generate').addEventListener('click', generateAll)
 document.getElementById('add-tourist').addEventListener('click', addTourist)

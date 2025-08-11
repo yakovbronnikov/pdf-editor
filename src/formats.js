@@ -34,10 +34,6 @@ export function dateFormat(inputDate, addDay) {
         monthName: monthList[monthName]
     }
 
-    if (addDay > 0) {
-        console.log(dateList.month)
-    }
-
     return dateList
 }
 
